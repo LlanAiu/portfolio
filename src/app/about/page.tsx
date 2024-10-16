@@ -38,11 +38,22 @@ export default function Page(){
     return (
         <div>
             <Navigation path='about'/>
-            <div>
-                <h1>About Me</h1>
-                <p> I... </p>
-                <p>{descriptions[index].text}</p>
-                <Image src={descriptions[index].image} alt='Image of Me' width={200} height={200}/>
+            <div className='w-full h-full'>
+                <div className='p-32 inline-block w-3/5 h-full'>
+                    <h1 className='text-5xl mb-20'><b>About Me</b></h1>
+                    <p className='text-4xl my-10'><b>I...</b></p>
+                    <p className='text-3xl my-10'>{descriptions[index].text}</p>
+                </div>
+                <div className='p-10 inline-block w-2/5'>
+                    <Image 
+                        src={descriptions[index].image} 
+                        alt='About me image' 
+                        width={200} 
+                        height={200}
+                        className='inline-block'
+                    />
+                </div>
+                
             </div>
         </div>
     );

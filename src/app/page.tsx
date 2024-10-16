@@ -22,18 +22,19 @@ export default function Home() {
   }, [display]);
 
   const links = [
-    {text: 'About Me', link: './about'},
-    {text: 'Projects', link: './projects'},
-    {text: 'Currently Working On', link: './current'},
-    {text: '(Hit Space)', link: './'}
+    {text: 'read my sparse autobiographyy', link: './about'},
+    {text: 'attend my project gallery', link: './projects'},
+    {text: 'contemplate a day in my life', link: './current'},
+    {text: 'Press [Space]', link: './'}
   ];
 
   return (
-    <div className='text-center'>
-      <p>Hello There.</p>
-      <p>I'm Alan Liu</p>
+    <div className='mt-24 text-center'>
+      <h1 className='text-5xl m-10'>Hello There</h1>
+      <h1 className='text-4xl m-20'>I'm Alan Liu</h1>
+      <p className='text-xl m-10'>Since you're here already, why don't you...</p>
       <Link href={links[display].link}>
-        <p>{links[display].text}</p>
+        <p className='text-2xl m-10'>{links[display].text}</p>
       </Link>
     </div>
   );
