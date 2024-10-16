@@ -1,3 +1,57 @@
+'use client'
+
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
 export default function Page(){
-    return <p>Projects</p>
+
+    const [index, setIndex] = useState(0);
+
+    useEffect(() => {
+        const handlePress = (e: KeyboardEvent) => {
+            if(e.code === 'Space'){
+                setIndex((index + 1) % projects.length);
+            }
+        };
+
+        window.addEventListener('keydown', handlePress);
+
+        return () => {
+            window.removeEventListener('keydown', handlePress);
+        }
+    }, [index]);
+
+    const projects = [
+        {
+            title: 'PengDa', 
+            description: 'A lightweight custom reinforcement learning model built using Java to play Mahjong complete with a scrappy (and crappy) UI', 
+            link: 'https://github.com/LlanAiu/PengDa'
+        },
+        {
+            title: 'Tuesday Once More',
+            description: 'A web application designed to hold study problems used to review and retain class material',
+            link: 'https://github.com/LlanAiu/tuesday-once-more'
+        },
+        {
+            title: 'Crescendo Software',
+            description: 'Robot Code for our team\'s 2024 robot. Yes, it\'s not my project, but this has much sentimental value',
+            link: 'https://github.com/Team-4795/2024-Crescendo'
+        },
+        {
+            title: 'LoggedRL',
+            description: 'My trial-by-fire project for hackathons. The reinforcement learning framework itself is buggy as it stands, but the logging looks fine ig',
+            link: 'https://github.com/LlanAiu/LoggedRL'
+        }
+    ];
+
+    return (
+        <>
+            <p>Projects</p>
+            <h1>{projects[index].title}</h1>
+            <p>{projects[index].description}</p>
+            <Link href={projects[index].link}>
+                <p>Project Link</p>
+            </Link>
+        </>
+    );
 }
