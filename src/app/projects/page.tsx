@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Navigation from '../components/nav-bar';
 
 export default function Page(){
 
@@ -45,13 +46,16 @@ export default function Page(){
     ];
 
     return (
-        <>
-            <p>Projects</p>
-            <h1>{projects[index].title}</h1>
-            <p>{projects[index].description}</p>
-            <Link href={projects[index].link}>
-                <p>Project Link</p>
-            </Link>
-        </>
+        <div>
+            <Navigation path='projects' />
+            <div>
+                <p>Projects</p>
+                <h1>{projects[index].title}</h1>
+                <p>{projects[index].description}</p>
+                <Link href={projects[index].link}>
+                    <p>Project Link</p>
+                </Link>
+            </div>
+        </div>
     );
 }

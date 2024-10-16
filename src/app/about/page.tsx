@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import defaultImage from './ProfileImage2.jpg';
+import Navigation from '../components/nav-bar';
 
 export default function Page(){
     const [index, setIndex] = useState(0);
@@ -36,10 +37,13 @@ export default function Page(){
 
     return (
         <div>
-            <h1>About Me</h1>
-            <p> I... </p>
-            <p>{descriptions[index].text}</p>
-            <Image src={descriptions[index].image} alt='Image of Me' width={200} height={200}/>
+            <Navigation path='about'/>
+            <div>
+                <h1>About Me</h1>
+                <p> I... </p>
+                <p>{descriptions[index].text}</p>
+                <Image src={descriptions[index].image} alt='Image of Me' width={200} height={200}/>
+            </div>
         </div>
     );
 }
