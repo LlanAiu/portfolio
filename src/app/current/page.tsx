@@ -23,7 +23,8 @@ export default function Page() {
 
     const current = [
         {text: 'learning Express.js and API development'},
-        {text: 'working on an ingredients-to-recipe API (for our pledge project)'},
+        {text: 'working on an ingredients-to-recipe API'},
+        {text: 'developing a personal portfolio website (as you can tell)'},
         {text: 'reading through \"An Introduction to Statistical Learning, 2nd Edition\" (James, et al.)'},
         {text: 'struggling with competitive programming problems...'},
         {text: 'on fall break (thankfully)!'}

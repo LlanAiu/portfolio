@@ -40,7 +40,7 @@ export default function Page(){
         },
         {
             title: 'LoggedRL',
-            description: 'My trial-by-fire project for hackathons. The reinforcement learning framework itself is buggy as it stands, but the logging looks fine ig',
+            description: 'A trial-by-fire project for hackathons. The reinforcement learning framework itself is buggy as it stands, the logging looks fine',
             link: 'https://github.com/LlanAiu/LoggedRL'
         }
     ];
