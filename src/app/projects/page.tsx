@@ -46,15 +46,16 @@ export default function Page(){
     ];
 
     return (
-        <div>
+        <div className='w-full h-full'>
             <Navigation path='projects' />
-            <div>
-                <p>Projects</p>
-                <h1>{projects[index].title}</h1>
-                <p>{projects[index].description}</p>
-                <Link href={projects[index].link}>
-                    <p>Project Link</p>
-                </Link>
+            <div className='space-y-24 pt-24 pl-24'>
+                <h1 className='text-5xl'><b>{projects[index].title}</b></h1>
+                <p className='text-4xl'>{projects[index].description}</p>
+                <div className='w-max h-max rounded-md p-2 bg-slate-200'>
+                    <Link href={projects[index].link}>
+                        <p className='text-3xl'>Project Link</p>
+                    </Link>
+                </div>
             </div>
         </div>
     );

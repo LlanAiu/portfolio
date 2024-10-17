@@ -36,24 +36,26 @@ export default function Page(){
     ];
 
     return (
-        <div>
+        <div className='h-full w-full'>
             <Navigation path='about'/>
-            <div className='w-full h-full'>
-                <div className='p-32 inline-block w-3/5 h-full'>
-                    <h1 className='text-5xl mb-20'><b>About Me</b></h1>
-                    <p className='text-4xl my-10'><b>I...</b></p>
-                    <p className='text-3xl my-10'>{descriptions[index].text}</p>
+            <div className='w-full h-full flex'>
+                <div className='pt-32 pl-32 inline-block flex-auto content-start space-y-24'>
+                    <h1 className='text-6xl'><b>Mini Autobiography</b></h1>
+                    <p className='text-6xl max-w-124'>
+                        <b>I...</b>
+                        <span className='w-10'> </span>
+                        <span className='text-5xl leading-relaxed'>{descriptions[index].text}</span>
+                    </p>
                 </div>
-                <div className='p-10 inline-block w-2/5'>
+                <div className='px-10 py-28 w-2/5 flex-initial content-start'>
                     <Image 
                         src={descriptions[index].image} 
                         alt='About me image' 
-                        width={200} 
-                        height={200}
+                        width={300} 
+                        height={300}
                         className='inline-block'
                     />
                 </div>
-                
             </div>
         </div>
     );

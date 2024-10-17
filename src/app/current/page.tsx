@@ -22,19 +22,19 @@ export default function Page() {
     }, [index]);
 
     const current = [
-        {text: 'Learning Express.js and API development'},
-        {text: 'Working on an ingredients-to-recipe API (for our pledge project...)'},
-        {text: 'Reading through \"An Introduction to Statistical Learning, 2nd Edition\" (James, et al.)'},
-        {text: 'Struggling with competitive programming problems'},
+        {text: 'learning Express.js and API development'},
+        {text: 'working on an ingredients-to-recipe API (for our pledge project)'},
+        {text: 'reading through \"An Introduction to Statistical Learning, 2nd Edition\" (James, et al.)'},
+        {text: 'struggling with competitive programming problems...'},
         {text: 'on fall break (thankfully)!'}
     ];
 
     return (
-        <div>
+        <div className='w-full h-full'>
             <Navigation path='current' />
-            <div>
-                <p>Currently I am...</p>
-                <p>{current[index].text}</p>
+            <div className='pt-36 pl-32 space-y-24'>
+                <p className='text-5xl'><b>Currently, I am...</b></p>
+                <p className='text-4xl'>{current[index].text}</p>
             </div>
         </div>
     );
