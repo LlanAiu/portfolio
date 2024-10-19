@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import defaultImage from './ProfileImage2.jpg';
 import FRCImage from './FRC.jpg';
+import bellTowerImage from './BellTower.jpg';
 import Navigation from '../components/nav-bar';
 import { motion } from 'framer-motion';
 import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
@@ -39,8 +40,8 @@ export default function Page() {
         },
         {
             text: 'am a student @ UNC-CH',
-            image: defaultImage,
-            dim: { width: 300, height: 300 }
+            image: bellTowerImage,
+            dim: { width: 300, height: 500 }
         },
         {
             text: 'am a believer that problem-solving is an art form',
