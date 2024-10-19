@@ -3,15 +3,30 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Navigation from '../components/nav-bar';
+import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
+import { motion } from 'framer-motion';
+import clsx from 'clsx';
 
-export default function Page(){
+export default function Page() {
 
     const [index, setIndex] = useState(0);
+    const [swap, setSwap] = useState(false);
+    const [textSwap, setTextSwap] = useState(false);
 
     useEffect(() => {
         const handlePress = (e: KeyboardEvent) => {
-            if(e.code === 'Space'){
-                setIndex((index + 1) % projects.length);
+            if (e.code === 'Space') {
+                setSwap(prev => !prev);
+                setTimeout(() => {
+                    setTextSwap(prev => !prev);
+                }, TextChangeDelay * 500);
+                setTimeout(() => {
+                    setSwap(prev => !prev);
+                }, TextChangeDelay * 1000);
+                setTimeout(() => {
+                    setTextSwap(prev => !prev);
+                    setIndex((index + 1) % projects.length);
+                }, TextChangeDelay * 1500);
             }
         };
 
@@ -24,8 +39,8 @@ export default function Page(){
 
     const projects = [
         {
-            title: 'PengDa', 
-            description: 'A lightweight custom reinforcement learning model built using Java to play Mahjong complete with a scrappy (and crappy) UI', 
+            title: 'PengDa',
+            description: 'A lightweight custom reinforcement learning model built using Java to play Mahjong complete with a scrappy (and crappy) UI',
             link: 'https://github.com/LlanAiu/PengDa'
         },
         {
@@ -45,18 +60,58 @@ export default function Page(){
         }
     ];
 
+    const text = TextInitialX;
+    const textFade = TextSwapFade;
+
     return (
         <div className='w-full h-full'>
-            <Navigation path='projects' />
-            <div className='space-y-24 pt-24 pl-24'>
-                <h1 className='text-5xl'><b>{projects[index].title}</b></h1>
-                <p className='text-4xl'>{projects[index].description}</p>
-                <div className='w-max h-max rounded-md p-2 bg-slate-200'>
-                    <Link href={projects[index].link}>
-                        <p className='text-3xl'>Project Link</p>
-                    </Link>
-                </div>
-            </div>
+            <Navigation path='projects' bg='#D1E5F0' text='black' bttn='#9BE9DB' hlght='#48BEFF' />
+            <motion.div
+                className='h-full'
+                animate={{ backgroundColor: '#206F62', color: '#C2FDFF' }}
+            >
+                <motion.div
+                    className='space-y-24 pt-24 pl-24'
+                    animate='visible'
+                    initial='hidden'
+                    variants={text}
+                >
+                    <motion.div variants={text}>
+                        <motion.h1
+                            className='text-5xl'
+                            animate={clsx({
+                                'in': !swap,
+                                'out': swap
+                            })}
+                            variants={textFade}
+                        >
+                            <b>{projects[index].title}</b>
+                        </motion.h1>
+                    </motion.div>
+                    <motion.div variants={text}>
+                        <motion.p
+                            className='text-4xl'
+                            animate={clsx({
+                                'in': !textSwap,
+                                'out': textSwap
+                            })}
+                            variants={textFade}
+                        >
+                            {projects[index].description}
+                        </motion.p>
+                    </motion.div>
+
+                    <motion.div 
+                        className='w-max h-max rounded-md p-2' 
+                        animate={{backgroundColor: '#143732'}}
+                        variants={text}
+                    >
+                        <Link href={projects[index].link}>
+                            <p className='text-3xl'>Project Link</p>
+                        </Link>
+                    </motion.div>
+                </motion.div>
+            </motion.div>
         </div>
     );
 }

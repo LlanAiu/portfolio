@@ -1,8 +1,11 @@
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 
-export default function Navigation({path} : {path: string}){
+export default function Navigation({path, bg, text, bttn, hlght} : {
+    path: string, bg: string, text: string, bttn: string, hlght: string
+}) {
 
     const links = [
         {text: 'Home', link: '/'},
@@ -12,18 +15,23 @@ export default function Navigation({path} : {path: string}){
     ];
 
     return (
-        <div className='mt-2 w-full h-12 space-x-20 mb-4 border-b'>
+        <motion.div animate={{backgroundColor: bg, color: text}} className='pt-2 w-full h-14 space-x-20 border-b'>
             {links.map((link) => 
-                (<Link 
-                    key={link.text} 
-                    href={link.link} 
-                    className={clsx('inline-block text-center ml-2 p-2 border rounded-md', {
-                        'bg-blue-200' : link.link.includes(path)
-                    })}
+                (<motion.div
+                    key={link.text}
+                    className='inline-block w-max h-10 ml-2 p-2 border rounded-md'
+                    animate={{
+                        backgroundColor: (link.link.includes(path) ? hlght : bttn)
+                    }}
                 >
-                    <p>{link.text}</p>
-                </Link>)
+                    <Link 
+                        href={link.link}
+                        className='text-center'
+                    >
+                        <p>{link.text}</p>
+                    </Link>
+                </motion.div>)
             )}
-        </div>
+        </motion.div>
     );
 }
