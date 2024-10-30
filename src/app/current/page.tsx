@@ -30,12 +30,12 @@ export default function Page() {
     }, [index]);
 
     const current = [
-        {text: 'learning Express.js and API development'},
+        {text: 'learning API development using FastAPI'},
         {text: 'working on an ingredients-to-recipe API'},
         {text: 'developing a personal portfolio website (as you can tell)'},
         {text: 'reading through \"An Introduction to Statistical Learning, 2nd Edition\" (James, et al.)'},
         {text: 'struggling with competitive programming problems...'},
-        {text: 'on fall break (thankfully)!'}
+        {text: 'patiently waiting for winter break'}
     ];
 
     const text = TextInitialY;

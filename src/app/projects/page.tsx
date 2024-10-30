@@ -55,8 +55,13 @@ export default function Page() {
         },
         {
             title: 'LoggedRL',
-            description: 'A trial-by-fire project for hackathons. The reinforcement learning framework itself is buggy as it stands, the logging looks fine',
+            description: 'A (kinda) hackathon project. The reinforcement learning framework itself is buggy as it stands, the logging looks fine',
             link: 'https://github.com/LlanAiu/LoggedRL'
+        },
+        {
+            title: 'Recipe-API',
+            description: 'An API that will return possible recipes that you can make from a list of ingredients that you have',
+            link: 'https://github.com/LlanAiu/recipe-api'
         }
     ];
 

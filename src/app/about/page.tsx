@@ -44,11 +44,6 @@ export default function Page() {
             dim: { width: 300, height: 500 }
         },
         {
-            text: 'am a believer that problem-solving is an art form',
-            image: defaultImage,
-            dim: { width: 300, height: 300 }
-        },
-        {
             text: 'love playing cards with friends and family',
             image: defaultImage,
             dim: { width: 300, height: 300 }
