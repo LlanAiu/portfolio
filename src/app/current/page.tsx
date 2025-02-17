@@ -34,7 +34,7 @@ export default function Page() {
         {text: 'working on a desktop application to transcribe piano audio'},
         {text: 'sitting through my classes (as per usual)'},
         {text: 'reading \"Deep Learning\" (Goodfellow, et. al)'},
-        {text: 'shocked that it\'s gonna snow three times this year!!'}
+        {text: 'shocked that it\'s really gonna snow three times this year!!'}
     ];
 
     const text = TextInitialY;

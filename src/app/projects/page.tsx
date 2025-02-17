@@ -50,18 +50,22 @@ export default function Page() {
         },
         {
             title: 'Crescendo Software',
-            description: 'Robot Code for our team\'s 2024 robot. Yes, it\'s not my project, but this has much sentimental value',
+            description: 'Robot Code for our team\'s 2024 robot. This has much sentimental value (Thanks again FRC4795! ❤)',
             link: 'https://github.com/Team-4795/2024-Crescendo'
         },
         {
-            title: 'LoggedRL',
-            description: 'A (kinda) hackathon project. The reinforcement learning framework itself is buggy as it stands, the logging looks fine',
-            link: 'https://github.com/LlanAiu/LoggedRL'
+            title: 'Let You Cook',
+            description: 'An application for suggested recipes that you can make from a list of ingredients that you have',
+            link: 'https://github.com/LlanAiu/recipe-api'
         },
         {
-            title: 'Recipe-API',
-            description: 'An API that will return possible recipes that you can make from a list of ingredients that you have',
-            link: 'https://github.com/LlanAiu/recipe-api'
+            title: 'Solo Mafia',
+            description: 'Ever wish you could play Mafia, but you didn\'t have enough players? Wish no more! (Built for HackDuke \'25)',
+            link: 'https://github.com/LlanAiu/HD2025'
+        }, {
+            title: 'Auto-Transcriber',
+            description: 'Why search for sheet music when you can generate it from an audio file? (Work in progress)',
+            link: 'https://github.com/LlanAiu/music-transcriber'
         }
     ];
 
