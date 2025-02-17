@@ -50,7 +50,7 @@ export default function Home() {
 				animate='visible'
 				variants={text}
 			>
-				<motion.h1 className='text-7xl' variants={text}><b>Hello There</b></motion.h1>
+				<motion.h1 className='text-7xl' variants={text}><b>Hello There!</b></motion.h1>
 				<motion.h1 className='text-5xl' variants={text}>I'm Alan Liu</motion.h1>
 				<motion.p className='text-2xl' variants={text}>Since you're here already, why don't you...</motion.p>
 				<motion.div className='my-10' variants={text}>

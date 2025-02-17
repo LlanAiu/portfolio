@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import defaultImage from './ProfileImage2.jpg';
-import FRCImage from './FRC.jpg';
-import bellTowerImage from './BellTower.jpg';
+import defaultImage from './images/ProfileImage2.jpg';
+import FRCImage from './images/FRC.jpg';
+import bellTowerImage from './images/BellTower.jpg';
+import kouryImage from './images/Koury.jpg';
+import roboticsImage from './images/Robotics.jpg';
+import cardsImage from './images/Cards.jpg';
 import Navigation from '../components/nav-bar';
 import { motion } from 'motion/react';
 import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
@@ -45,8 +48,8 @@ export default function Page() {
         },
         {
             text: 'love playing cards with friends and family',
-            image: defaultImage,
-            dim: { width: 300, height: 300 }
+            image: cardsImage,
+            dim: { width: 375, height: 350 }
         },
         {
             text: 'play the piano, although mostly as a meditation substitute',
@@ -60,13 +63,13 @@ export default function Page() {
         },
         {
             text: 'am interested in machine learning and robotics',
-            image: defaultImage,
-            dim: { width: 300, height: 300 }
+            image: roboticsImage,
+            dim: { width: 400, height: 300 }
         },
         {
             text: 'am a retired swimmer',
-            image: defaultImage,
-            dim: { width: 300, height: 300 }
+            image: kouryImage,
+            dim: { width: 275, height: 300 }
         }
     ];
 
