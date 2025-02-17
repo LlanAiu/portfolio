@@ -1,6 +1,6 @@
 
 
-export const TextChangeDelay = 0.3;
+export const TextChangeDelay = 0.2;
 
 export const TextInitialX = {
     visible: { 
@@ -8,8 +8,8 @@ export const TextInitialX = {
         x: 0, 
         transition: {
             when: "beforeChildren",
-            duration: 1.2,
-            staggerChildren: 0.75
+            duration: 1.0,
+            staggerChildren: 0.6
         }
     },
     hidden: { 
@@ -27,8 +27,8 @@ export const TextInitialY = {
         y: 0, 
         transition: {
             when: "beforeChildren",
-            duration: 1.2,
-            staggerChildren: 0.75
+            duration: 1.0,
+            staggerChildren: 0.6
         }
     },
     hidden: { 
