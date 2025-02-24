@@ -14,26 +14,36 @@ export default function Page() {
     const [textSwap, setTextSwap] = useState(false);
 
     useEffect(() => {
-        const handlePress = (e: KeyboardEvent) => {
-            if (e.code === 'Space') {
+        function swap() {
+            setSwap(prev => !prev);
+            setTimeout(() => {
+                setTextSwap(prev => !prev);
+            }, TextChangeDelay * 500);
+            setTimeout(() => {
                 setSwap(prev => !prev);
-                setTimeout(() => {
-                    setTextSwap(prev => !prev);
-                }, TextChangeDelay * 500);
-                setTimeout(() => {
-                    setSwap(prev => !prev);
-                }, TextChangeDelay * 1000);
-                setTimeout(() => {
-                    setTextSwap(prev => !prev);
-                    setIndex((index + 1) % projects.length);
-                }, TextChangeDelay * 1500);
-            }
+            }, TextChangeDelay * 1000);
+            setTimeout(() => {
+                setTextSwap(prev => !prev);
+                setIndex((index + 1) % projects.length);
+            }, TextChangeDelay * 1500);
+        }
+
+        function handlePress(e: KeyboardEvent) {
+            swap();
         };
 
+        function handleTouchStart(e: TouchEvent) {
+            if (!(e.target instanceof HTMLSpanElement)) {
+                swap();
+            }
+        }
+
         window.addEventListener('keydown', handlePress);
+        window.addEventListener('touchstart', handleTouchStart);
 
         return () => {
             window.removeEventListener('keydown', handlePress);
+            window.removeEventListener('touchstart', handleTouchStart);
         }
     }, [index]);
 
@@ -80,14 +90,14 @@ export default function Page() {
                 animate={{ backgroundColor: '#206F62', color: '#C2FDFF' }}
             >
                 <motion.div
-                    className='space-y-24 pt-24 pl-24'
+                    className='space-y-24 pt-24 px-6 md:space-y-12 md:pt-12 md:pl-12 sm:pt-6 sm:pl-6'
                     animate='visible'
                     initial='hidden'
                     variants={text}
                 >
                     <motion.div variants={text}>
                         <motion.h1
-                            className='text-5xl'
+                            className='text-5xl md:text-4xl sm:text-3xl'
                             animate={clsx({
                                 'in': !swap,
                                 'out': swap
@@ -99,7 +109,7 @@ export default function Page() {
                     </motion.div>
                     <motion.div variants={text}>
                         <motion.p
-                            className='text-4xl'
+                            className='text-4xl md:text-3xl sm:text-2xl'
                             animate={clsx({
                                 'in': !textSwap,
                                 'out': textSwap
@@ -110,13 +120,13 @@ export default function Page() {
                         </motion.p>
                     </motion.div>
 
-                    <motion.div 
-                        className='w-max h-max rounded-md p-2' 
-                        animate={{backgroundColor: '#143732'}}
+                    <motion.div
+                        className='w-max h-max rounded-md p-2'
+                        animate={{ backgroundColor: '#143732' }}
                         variants={text}
                     >
                         <Link href={projects[index].link}>
-                            <p className='text-3xl'>Project Link</p>
+                            <span className='text-3xl md:text-2xl sm:text-xl'>Project Link</span>
                         </Link>
                     </motion.div>
                 </motion.div>
