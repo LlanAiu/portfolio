@@ -52,7 +52,7 @@ export default function Page() {
 
     const descriptions = [
         {
-            text: 'am I stat and (pre) CS major',
+            text: 'am a stat and CS major',
             image: defaultImage,
             dim: { width: 1581, height: 1702 },
         },
@@ -65,11 +65,6 @@ export default function Page() {
             text: 'love playing cards with friends and family',
             image: cardsImage,
             dim: { width: 375, height: 350 }
-        },
-        {
-            text: 'play the piano, although mostly as a meditation substitute',
-            image: defaultImage,
-            dim: { width: 300, height: 300 }
         },
         {
             text: 'am an FRC Alum',

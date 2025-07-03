@@ -42,11 +42,10 @@ export default function Page() {
     }, [index]);
 
     const current = [
-        { text: 'learning Rust (it\'s been fun, would recommend)' },
-        { text: 'working on a desktop application to transcribe piano audio' },
-        { text: 'sitting through my classes (as per usual)' },
+        { text: 'enjoying summer break!' },
         { text: 'reading \"Deep Learning\" (Goodfellow, et. al)' },
-        { text: 'shocked that it snowed three times this year!!' }
+        { text: 'learning how to not burn down the kitchen (cook, properly)' },
+        { text: 'still trying to get the hang of Rust' }
     ];
 
     const text = TextInitialY;
