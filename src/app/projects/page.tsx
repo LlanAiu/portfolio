@@ -49,18 +49,23 @@ export default function Page() {
 
     const projects = [
         {
+            title: 'Mourning Ember',
+            description: 'A 2D, top-down dungeon-crawling game, giving you a chance to enact fiery vengeance on the demons that have wronged you. Built using a custom game engine via JavaFX.',
+            link: 'https://gitfront.io/r/Llan/pCi6b29FZTMV/mourning-ember/'
+        },
+        {
             title: 'Let You Cook',
             description: 'An application for suggested recipes that you can make from a list of ingredients that you have',
             link: 'https://github.com/LlanAiu/recipe-api'
         },
         {
             title: 'Solo Mafia',
-            description: 'A project that gives you a platform to play Mafia even if you have no friends (Built for HackDuke \'25)',
+            description: 'A project that gives you a platform to play Mafia even if you have no friends with you right now (Built for HackDuke \'25)',
             link: 'https://github.com/LlanAiu/HD2025'
         },
         {
             title: 'Auto-Transcriber',
-            description: 'A desktop application that allows you to transcribes an audio file into sheet music (Work in progress)',
+            description: 'A desktop application that allows you to transcribes an audio file into sheet music (WIP)',
             link: 'https://github.com/LlanAiu/music-transcriber'
         },
         {
