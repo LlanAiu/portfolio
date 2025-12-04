@@ -17,12 +17,12 @@ export default function Navigation({ path, bg, text, bttn, hlght }: {
     return (
         <motion.div
             animate={{ backgroundColor: bg, color: text }}
-            className='pt-2 w-full h-14 space-x-4 sm:space-x-20 border-b flex flex-wrap justify-center sm:justify-start'
+            className='pt-2 w-full h-14 sm:space-x-20 md:space-x-12 border-b flex flex-wrap justify-center sm:justify-start'
         >
             {links.map((link) =>
             (<motion.div
                 key={link.text}
-                className='inline-block w-max h-10 ml-2 p-2 border rounded-md'
+                className='inline-block w-max h-10 ml-2 py-2 px-3 border rounded-md'
                 animate={{
                     backgroundColor: (link.link.includes(path) ? hlght : bttn)
                 }}

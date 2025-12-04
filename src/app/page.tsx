@@ -72,13 +72,13 @@ export default function Home() {
 				animate='visible'
 				variants={text}
 			>
-				<motion.h1 className='text-4xl md:text-7xl' variants={text}><b>Hello There!</b></motion.h1>
-				<motion.h1 className='text-3xl md:text-5xl' variants={text}>I'm Alan Liu</motion.h1>
-				<motion.p className='text-xl md:text-2xl' variants={text}>Since you're here already, why don't you...</motion.p>
+				<motion.h1 className='text-4xl md:text-8xl' variants={text}><b>Hello There!</b></motion.h1>
+				<motion.h1 className='text-3xl md:text-6xl' variants={text}>I'm Alan Liu</motion.h1>
+				<motion.p className='text-xl md:text-3xl' variants={text}>Since you're here already, why don't you...</motion.p>
 				<motion.div className='my-5 md:my-10' variants={text}>
 					<Link href={links[display].link} ref={linkRef}>
 						<motion.p
-							className='text-xl md:text-3xl absolute w-full text-center'
+							className='text-xl md:text-4xl absolute w-full text-center'
 							animate={clsx({
 								'in': anim,
 								'out': !anim
@@ -88,7 +88,7 @@ export default function Home() {
 							{links[display].text}
 						</motion.p>
 						<motion.p
-							className='text-xl md:text-3xl absolute w-full text-center'
+							className='text-xl md:text-4xl absolute w-full text-center'
 							animate={clsx({
 								'out': anim,
 								'in': !anim

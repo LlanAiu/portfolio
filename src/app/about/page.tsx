@@ -17,7 +17,7 @@ import cardsImage from '../../../public/Cards.jpg';
 import Navigation from '../components/nav-bar';
 import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
 
-export default function Page() {
+export default function AboutPage() {
     const [index, setIndex] = useState(0);
     const [swap, setSwap] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
