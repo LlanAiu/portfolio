@@ -1,22 +1,26 @@
 'use client'
+// builtin
 
+// external
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import clsx from 'clsx';
+
+// internal
 import { TextChangeDelay, TextInitialY, TextSwapFade } from './util/animUtil';
 
-export default function Home() {
 
+export default function Home() {
 	const [display, setDisplay] = useState(3);
 	const [anim, setAnimate] = useState(true);
 	const [initialText, setInitialText] = useState('Press [Space]');
 	const linkRef = useRef<HTMLAnchorElement>(null);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: Only used for keyboard/touchscreen controls
 	useEffect(() => {
-
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.code === 'Space' && !(linkRef.current && linkRef.current.contains(event.target as Node))) {
+			if (event.code === 'Space' && !(linkRef.current?.contains(event.target as Node))) {
 				setTimeout(() => {
 					setDisplay(prev => (prev + 1) % (links.length - 1));
 				}, TextChangeDelay * 1000);
@@ -25,7 +29,7 @@ export default function Home() {
 		};
 
 		const handleTouchStart = (event: TouchEvent) => {
-			if (!(linkRef.current && linkRef.current.contains(event.target as Node))) {
+			if (!(linkRef.current?.contains(event.target as Node))) {
 				setTimeout(() => {
 					setDisplay(prev => (prev + 1) % (links.length - 1));
 				}, TextChangeDelay * 1000);
