@@ -1,16 +1,20 @@
 'use client'
+// builtin
 
+// external
 import { useEffect, useState } from 'react';
-import Navigation from '../components/nav-bar';
 import { motion } from 'motion/react';
-import { TextChangeDelay, TextInitialY, TextSwapFade } from '../util/animUtil';
 import clsx from 'clsx';
 
-export default function Page() {
+// internal
+import Navigation from '../components/nav-bar';
+import { TextChangeDelay, TextInitialY, TextSwapFade } from '../util/animUtil';
 
+export default function CurrentPage() {
     const [index, setIndex] = useState(0);
     const [swap, setSwap] = useState(false);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: length of current is effectively constant
     useEffect(() => {
         const swap = () => {
             setSwap(prev => !prev);
@@ -42,10 +46,12 @@ export default function Page() {
     }, [index]);
 
     const current = [
-        { text: 'enjoying summer break!' },
-        { text: 'reading \"Deep Learning\" (Goodfellow, et. al)' },
-        { text: 'learning how to not burn down the kitchen (cook, properly)' },
-        { text: 'still trying to get the hang of Rust' }
+        { text: 'putting the finish touches on the fall semester' },
+        { text: 'looking for a new book to read' },
+        { text: 'revisiting reinforcement learning again' },
+        { text: 'discovering just how nice Arcs and Mutexes are in Rust' },
+        { text: 'trying (and somewhat failing) to avoid the cold' },
+        { text: 'looking forward to winter break and the new year!' }
     ];
 
     const text = TextInitialY;
@@ -54,22 +60,22 @@ export default function Page() {
     return (
         <div className='w-full h-full'>
             <Navigation path='current' bg='#B5B0BF' text='white' bttn='#1B4076' hlght='#266DD3' />
-            <motion.div animate={{ backgroundColor: '#266DD3', color: '101319' }} className='w-full h-full'>
+            <motion.div animate={{ backgroundColor: '#266DD3', color: 'white' }} className='w-full h-full'>
                 <motion.div
-                    className='pt-36 px-6 space-y-24 md:pt-24 md:pl-16 md:space-y-12 sm:pt-12 sm:pl-8 sm:space-y-6'
+                    className='sm:pt-12 sm:pl-8 sm:space-y-6 md:pt-24 md:pl-16 md:space-y-12 lg:pt-36 lg:px-18 lg:space-y-24'
                     animate='visible'
                     initial='hidden'
                     variants={text}
                 >
                     <motion.p
-                        className='text-5xl md:text-4xl sm:text-3xl'
+                        className='sm:text-4xl md:text-6xl  lg:text-7xl'
                         variants={text}
                     >
                         <b>Currently, I am...</b>
                     </motion.p>
                     <motion.div variants={text}>
                         <motion.p
-                            className='text-4xl md:text-3xl sm:text-2xl'
+                            className='sm:text-3xl md:text-4xl lg:text-5xl'
                             animate={clsx({
                                 'in': !swap,
                                 'out': swap

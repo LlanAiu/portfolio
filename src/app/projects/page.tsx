@@ -1,14 +1,17 @@
 'use client'
+// builtin
 
-import Link from 'next/link';
+// external
 import { useEffect, useState } from 'react';
-import Navigation from '../components/nav-bar';
-import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
+import Link from 'next/link';
 import { motion } from 'motion/react';
 import clsx from 'clsx';
 
-export default function Page() {
+// internal
+import Navigation from '../components/nav-bar';
+import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
 
+export default function ProjectsPage() {
     const [index, setIndex] = useState(0);
     const [swap, setSwap] = useState(false);
     const [textSwap, setTextSwap] = useState(false);
@@ -28,7 +31,7 @@ export default function Page() {
             }, TextChangeDelay * 1500);
         }
 
-        function handlePress(e: KeyboardEvent) {
+        function handlePress(_e: KeyboardEvent) {
             swap();
         };
 
@@ -50,13 +53,18 @@ export default function Page() {
     const projects = [
         {
             title: 'Mourning Ember',
-            description: 'A 2D, top-down dungeon-crawling game, giving you a chance to enact fiery vengeance on the demons that have wronged you. Built using a custom game engine via JavaFX.',
+            description: 'A 2D, top-down dungeon-crawling game merging a point-and-click exploration system with turn-based combat and a card-based move set. Built using a custom game engine via JavaFX.',
             link: 'https://gitfront.io/r/Llan/pCi6b29FZTMV/mourning-ember/'
         },
         {
-            title: 'Let You Cook',
-            description: 'An application for suggested recipes that you can make from a list of ingredients that you have',
-            link: 'https://github.com/LlanAiu/recipe-api'
+            title: 'Neural Networks in Rust',
+            description: 'Self explanatory, but a side library built in accordance with and as practice for \'Deep Learning\' (2017)',
+            link: 'https://github.com/LlanAiu/rusted-networks'
+        },
+        {
+            title: 'Trivate',
+            description: 'A online head-to-head platform combining Protobowl\'s trivia focus with online Chess platform\'s 1-on-1 and rating concepts',
+            link: 'https://github.com/pranavkosuri97/hacknctriviaapp'
         },
         {
             title: 'Solo Mafia',
@@ -64,19 +72,14 @@ export default function Page() {
             link: 'https://github.com/LlanAiu/HD2025'
         },
         {
-            title: 'Auto-Transcriber',
-            description: 'A desktop application that allows you to transcribes an audio file into sheet music (WIP)',
-            link: 'https://github.com/LlanAiu/music-transcriber'
+            title: 'Let You Cook',
+            description: 'An application for suggested recipes that you can make from a list of ingredients that you have',
+            link: 'https://github.com/LlanAiu/recipe-api'
         },
         {
             title: 'PengDa',
-            description: 'A lightweight custom reinforcement learning model built using Java to play Mahjong complete with a scrappy (and crappy) UI',
+            description: 'A lightweight custom reinforcement learning model built using Java to play Mahjong (UI warning)',
             link: 'https://github.com/LlanAiu/PengDa'
-        },
-        {
-            title: 'Tuesday Once More',
-            description: 'A web application designed to hold study problems used to review and retain class material',
-            link: 'https://github.com/LlanAiu/tuesday-once-more'
         },
     ];
 
@@ -91,14 +94,14 @@ export default function Page() {
                 animate={{ backgroundColor: '#206F62', color: '#C2FDFF' }}
             >
                 <motion.div
-                    className='space-y-24 pt-24 px-6 md:space-y-12 md:pt-12 md:pl-12 sm:pt-6 sm:pl-6'
+                    className='sm:pt-6 sm:pl-6 md:space-y-12 md:pt-12 md:pl-12 lg:space-y-20 lg:pt-24 lg:px-6'
                     animate='visible'
                     initial='hidden'
                     variants={text}
                 >
                     <motion.div variants={text}>
                         <motion.h1
-                            className='text-5xl md:text-4xl sm:text-3xl'
+                            className='sm:text-3xl md:text-4xl lg:text-5xl'
                             animate={clsx({
                                 'in': !swap,
                                 'out': swap
@@ -110,7 +113,7 @@ export default function Page() {
                     </motion.div>
                     <motion.div variants={text}>
                         <motion.p
-                            className='text-4xl md:text-3xl sm:text-2xl'
+                            className='sm:text-2xl md:text-3xl lg:text-4xl'
                             animate={clsx({
                                 'in': !textSwap,
                                 'out': textSwap
@@ -122,12 +125,12 @@ export default function Page() {
                     </motion.div>
 
                     <motion.div
-                        className='w-max h-max rounded-md p-2'
+                        className='w-max h-max rounded-md px-3 py-2.5'
                         animate={{ backgroundColor: '#143732' }}
                         variants={text}
                     >
                         <Link href={projects[index].link}>
-                            <span className='text-3xl md:text-2xl sm:text-xl'>Project Link</span>
+                            <span className='sm:text-xl md:text-2xl'>Project Link</span>
                         </Link>
                     </motion.div>
                 </motion.div>

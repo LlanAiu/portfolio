@@ -1,22 +1,26 @@
 'use client'
+// builtin
 
+// external
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import clsx from 'clsx';
+
+// internal
 import { TextChangeDelay, TextInitialY, TextSwapFade } from './util/animUtil';
 
-export default function Home() {
 
+export default function Home() {
 	const [display, setDisplay] = useState(3);
 	const [anim, setAnimate] = useState(true);
 	const [initialText, setInitialText] = useState('Press [Space]');
 	const linkRef = useRef<HTMLAnchorElement>(null);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: Only used for keyboard/touchscreen controls
 	useEffect(() => {
-
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.code === 'Space' && !(linkRef.current && linkRef.current.contains(event.target as Node))) {
+			if (event.code === 'Space' && !(linkRef.current?.contains(event.target as Node))) {
 				setTimeout(() => {
 					setDisplay(prev => (prev + 1) % (links.length - 1));
 				}, TextChangeDelay * 1000);
@@ -25,7 +29,7 @@ export default function Home() {
 		};
 
 		const handleTouchStart = (event: TouchEvent) => {
-			if (!(linkRef.current && linkRef.current.contains(event.target as Node))) {
+			if (!(linkRef.current?.contains(event.target as Node))) {
 				setTimeout(() => {
 					setDisplay(prev => (prev + 1) % (links.length - 1));
 				}, TextChangeDelay * 1000);
@@ -68,13 +72,13 @@ export default function Home() {
 				animate='visible'
 				variants={text}
 			>
-				<motion.h1 className='text-4xl md:text-7xl' variants={text}><b>Hello There!</b></motion.h1>
-				<motion.h1 className='text-3xl md:text-5xl' variants={text}>I'm Alan Liu</motion.h1>
-				<motion.p className='text-xl md:text-2xl' variants={text}>Since you're here already, why don't you...</motion.p>
+				<motion.h1 className='text-4xl md:text-8xl' variants={text}><b>Hello There!</b></motion.h1>
+				<motion.h1 className='text-3xl md:text-6xl' variants={text}>I'm Alan Liu</motion.h1>
+				<motion.p className='text-xl md:text-3xl' variants={text}>Since you're here already, why don't you...</motion.p>
 				<motion.div className='my-5 md:my-10' variants={text}>
 					<Link href={links[display].link} ref={linkRef}>
 						<motion.p
-							className='text-xl md:text-3xl absolute w-full text-center'
+							className='text-xl md:text-4xl absolute w-full text-center'
 							animate={clsx({
 								'in': anim,
 								'out': !anim
@@ -84,7 +88,7 @@ export default function Home() {
 							{links[display].text}
 						</motion.p>
 						<motion.p
-							className='text-xl md:text-3xl absolute w-full text-center'
+							className='text-xl md:text-4xl absolute w-full text-center'
 							animate={clsx({
 								'out': anim,
 								'in': !anim

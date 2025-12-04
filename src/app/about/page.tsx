@@ -1,23 +1,28 @@
 'use client'
+// builtin
 
+// external
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import defaultImage from './images/ProfileImage2.jpg';
-import FRCImage from './images/FRC.jpg';
-import bellTowerImage from './images/BellTower.jpg';
-import kouryImage from './images/Koury.jpg';
-import roboticsImage from './images/Robotics.jpg';
-import cardsImage from './images/Cards.jpg';
-import Navigation from '../components/nav-bar';
 import { motion } from 'motion/react';
-import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
 import clsx from 'clsx';
 
-export default function Page() {
+// internal
+import defaultImage from '../../../public/ProfileImage2.jpg';
+import FRCImage from '../../../public/FRC.jpg';
+import bellTowerImage from '../../../public/BellTower.jpg';
+import kouryImage from '../../../public/Koury.jpg';
+import roboticsImage from '../../../public/Robotics.jpg';
+import cardsImage from '../../../public/Cards.jpg';
+import Navigation from '../components/nav-bar';
+import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
+
+export default function AboutPage() {
     const [index, setIndex] = useState(0);
     const [swap, setSwap] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: descriptions length is effectively constant
     useEffect(() => {
         const swap = () => {
             setSwap(prev => !prev);
@@ -54,7 +59,7 @@ export default function Page() {
         {
             text: 'am a stat and CS major',
             image: defaultImage,
-            dim: { width: 1581, height: 1702 },
+            dim: { width: 500, height: 600 }
         },
         {
             text: 'am a student @ UNC-CH',
@@ -99,7 +104,7 @@ export default function Page() {
                     initial='hidden'
                     variants={text}
                 >
-                    <motion.div className='pt-8 md:pt-32 px-4 md:pl-32 md:inline-block flex-initial content-start space-y-8 md:space-y-24 text-center md:text-left'>
+                    <motion.div className='pt-8 md:pt-28 px-4 md:pl-28 md:inline-block flex-initial content-start space-y-8 md:space-y-24 text-center md:text-left'>
                         <motion.h1
                             className='text-4xl md:text-6xl'
                             variants={text}
@@ -125,7 +130,7 @@ export default function Page() {
                         </motion.p>
                     </motion.div>
                     <motion.div
-                        className='px-4 py-8 md:px-10 md:py-28 w-full md:w-2/5 flex-auto content-start text-center md:text-left'
+                        className='p-10 h-full w-full md:w-1/2 flex-auto content-start text-center md:text-left'
                         variants={text}
                     >
                         <motion.div
@@ -135,23 +140,24 @@ export default function Page() {
                             })}
                             variants={fade}
                         >
-                            {!isMobile &&
-                                <Image
-                                    src={descriptions[index].image}
-                                    alt='About me image'
-                                    priority={true}
-                                    className='inline-block rounded-3xl'
-                                />
-                            }
+                            <div className='max-h-full h-full'>
+                                {!isMobile &&
+                                    <Image
+                                        src={descriptions[index].image}
+                                        alt='About me image'
+                                        loading='eager'
+                                        className='object-contain rounded-3xl'
+                                    />
+                                }
 
-                            {isMobile &&
-                                <Image
-                                    src={descriptions[index].image}
-                                    alt='About me image'
-                                    priority={true}
-                                    className='rounded-3xl'
-                                />
-                            }
+                                {isMobile &&
+                                    <Image
+                                        src={descriptions[index].image}
+                                        alt='About me image'
+                                        className='rounded-3xl'
+                                    />
+                                }
+                            </div>
                         </motion.div>
                     </motion.div>
                 </motion.div>
