@@ -1,16 +1,22 @@
+// builtin
+
+// external
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Caveat, Nothing_You_Could_Do } from "next/font/google";
+
+// internal
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"]
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const nothingYouCouldDo = Nothing_You_Could_Do({
+  variable: "--font-nothing-you-could-do",
+  weight: "400",
+  subsets: ["latin"]
+})
 
 export const metadata: Metadata = {
   title: "Alan Liu",
@@ -25,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${caveat.variable} ${nothingYouCouldDo.variable} antialiased`}
       >
         {children}
       </body>
