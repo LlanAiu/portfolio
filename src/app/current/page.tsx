@@ -46,12 +46,11 @@ export default function CurrentPage() {
     }, [index]);
 
     const current = [
-        { text: 'putting the finish touches on the fall semester' },
+        { text: 'excited for the year ahead in 2026!' },
         { text: 'looking for a new book to read' },
         { text: 'revisiting reinforcement learning again' },
         { text: 'discovering just how nice Arcs and Mutexes are in Rust' },
-        { text: 'trying (and somewhat failing) to avoid the cold' },
-        { text: 'looking forward to winter break and the new year!' }
+        { text: 'trying (and somehwat failing) to catch up on sleep' },
     ];
 
     const text = TextInitialY;
