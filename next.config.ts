@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-export default nextConfig;
+module.exports = {
+    transpilePackages: ['tegaki'],
+    turbopack: {
+        resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
+        rules: {
+            '*.ttf': {
+                type: 'asset',
+            },
+        },
+    }
+}
