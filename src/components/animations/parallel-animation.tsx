@@ -14,11 +14,12 @@ interface ParallelAnimationProps extends TimedAnimation {
 export default function ParallelAnimation({ children, onComplete }: ParallelAnimationProps) {
     const [finished, setFinished] = useState(0);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Not correct, runs too frequently
     useEffect(() => {
         if (finished === children.length) {
             onComplete?.();
         }
-    }, [finished, children.length, onComplete])
+    }, [finished])
 
     return (
         <div>
