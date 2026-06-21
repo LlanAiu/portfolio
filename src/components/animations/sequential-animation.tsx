@@ -4,7 +4,7 @@
 import { cloneElement, type ReactElement, useState } from "react";
 
 // internal
-import type { TimedAnimation } from "./timed-animation";
+import type { TimedAnimation } from "@/lib/animation/timed-animation";
 
 
 interface SequentialAnimationProps extends TimedAnimation {

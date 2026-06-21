@@ -9,7 +9,7 @@ import clsx from 'clsx';
 
 // internal
 import Navigation from '@/components/layout/nav-bar';
-import { TextChangeDelay, TextInitialX, TextSwapFade } from '@/lib/util/animUtil';
+import { TextChangeDelay, TextInitialX, TextSwapFade } from '@/lib/animation/animation-utils';
 
 export default function ProjectsPage() {
     const [index, setIndex] = useState(0);

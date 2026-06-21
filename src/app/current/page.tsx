@@ -8,7 +8,7 @@ import clsx from 'clsx';
 
 // internal
 import Navigation from '@/components/layout/nav-bar';
-import { TextChangeDelay, TextInitialY, TextSwapFade } from '@/lib/util/animUtil';
+import { TextChangeDelay, TextInitialY, TextSwapFade } from '@/lib/animation/animation-utils';
 
 export default function CurrentPage() {
     const [index, setIndex] = useState(0);

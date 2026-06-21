@@ -15,7 +15,7 @@ import kouryImage from '../../../public/Koury.jpg';
 import roboticsImage from '../../../public/Robotics.jpg';
 import cardsImage from '../../../public/Cards.jpg';
 import Navigation from '@/components/layout/nav-bar';
-import { TextChangeDelay, TextInitialX, TextSwapFade } from '@/lib/util/animUtil';
+import { TextChangeDelay, TextInitialX, TextSwapFade } from '@/lib/animation/animation-utils';
 
 export default function AboutPage() {
     const [index, setIndex] = useState(0);
