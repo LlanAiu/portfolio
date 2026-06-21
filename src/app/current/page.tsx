@@ -7,8 +7,8 @@ import { motion } from 'motion/react';
 import clsx from 'clsx';
 
 // internal
-import Navigation from '../components/nav-bar';
-import { TextChangeDelay, TextInitialY, TextSwapFade } from '../util/animUtil';
+import Navigation from '@/components/layout/nav-bar';
+import { TextChangeDelay, TextInitialY, TextSwapFade } from '@/lib/util/animUtil';
 
 export default function CurrentPage() {
     const [index, setIndex] = useState(0);

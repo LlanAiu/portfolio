@@ -1,6 +1,10 @@
-import clsx from 'clsx';
+// builtin
+
+// external
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
+// internal
 
 
 export default function Navigation({ path, bg, text, bttn, hlght }: {

@@ -8,7 +8,7 @@ import { motion } from 'motion/react';
 import clsx from 'clsx';
 
 // internal
-import { TextChangeDelay, TextInitialY, TextSwapFade } from './util/animUtil';
+import { TextChangeDelay, TextInitialY, TextSwapFade } from '@/lib/util/animUtil';
 
 
 export default function Home() {

@@ -14,8 +14,8 @@ import bellTowerImage from '../../../public/BellTower.jpg';
 import kouryImage from '../../../public/Koury.jpg';
 import roboticsImage from '../../../public/Robotics.jpg';
 import cardsImage from '../../../public/Cards.jpg';
-import Navigation from '../components/nav-bar';
-import { TextChangeDelay, TextInitialX, TextSwapFade } from '../util/animUtil';
+import Navigation from '@/components/layout/nav-bar';
+import { TextChangeDelay, TextInitialX, TextSwapFade } from '@/lib/util/animUtil';
 
 export default function AboutPage() {
     const [index, setIndex] = useState(0);
