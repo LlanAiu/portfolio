@@ -5,7 +5,7 @@
 
 // internal
 import SequentialAnimation from "@/components/animations/sequential-animation";
-import TegakiList from "@/components/animations/tegaki-list";
+import TegakiList from "@/components/animations/tegaki/tegaki-list";
 
 
 const listItems = [

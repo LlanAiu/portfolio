@@ -20,6 +20,7 @@ export default function SequentialAnimation({ children, onComplete }: Sequential
                 if (index >= playedCount) return null;
 
                 const sequenceProps: Partial<TimedAnimation> = {
+                    key: child.props.id,
                     onComplete: () => {
                         if (playedCount === index + 1) {
                             if (playedCount < children.length) {
@@ -28,8 +29,7 @@ export default function SequentialAnimation({ children, onComplete }: Sequential
                                 onComplete?.();
                             }
                         }
-                    },
-                    key: child.props.id
+                    }
                 }
 
                 return cloneElement(child, sequenceProps)

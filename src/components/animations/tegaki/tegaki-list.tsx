@@ -7,7 +7,7 @@ import { TegakiRenderer } from "tegaki";
 import bundle from "tegaki/fonts/caveat";
 
 // internal
-import type { TimedAnimation } from "./timed-animation";
+import type { TimedAnimation } from "../timed-animation";
 
 
 export interface TegakiListProps extends TimedAnimation {
