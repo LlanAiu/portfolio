@@ -8,7 +8,7 @@ import bundle from 'tegaki/fonts/caveat';
 
 // internal
 
-export default function PerfectFadingPage() {
+export default function TestPage() {
     const ref1 = useRef<TegakiRendererHandle>(null);
     const ref2 = useRef<TegakiRendererHandle>(null);
 
