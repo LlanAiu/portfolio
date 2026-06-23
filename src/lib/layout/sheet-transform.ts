@@ -31,7 +31,7 @@ export function buildBaseTransformSet(pages: number): SheetTransform[] {
     for (let i = 0; i < pages; i++) {
         transforms.push({
             rotate_degs: 1.2 * i,
-            translate_up: i * (2 * Math.random() - 1),
+            translate_up: 5 + 2 * i * (- 1) ** i,
             translate_left: 15 * i
         });
     }
@@ -39,13 +39,13 @@ export function buildBaseTransformSet(pages: number): SheetTransform[] {
     return transforms;
 }
 
-export function reviseTransformSetForHover(transforms: SheetTransform[], hoverIndex: number): SheetTransform[] {
-    const newTransforms = structuredClone(transforms);
+export function reviseTransformSetForHover(baseTransforms: SheetTransform[], hoverIndex: number): SheetTransform[] {
+    const newTransforms = structuredClone(baseTransforms);
 
-    for (let i = hoverIndex + 1; i < transforms.length; i++) {
+    for (let i = hoverIndex + 1; i < baseTransforms.length; i++) {
         newTransforms[i] = {
-            ...transforms[i],
-            translate_left: transforms[i].translate_left + 15
+            ...baseTransforms[i],
+            translate_left: baseTransforms[i].translate_left + 15
         };
     }
 

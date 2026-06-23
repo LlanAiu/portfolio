@@ -5,3 +5,7 @@
         rotate 0.4s ease-in-out,
         translate 0.4s ease-in-out;
 }
+
+.normal-writing {
+    writing-mode: horizontal-tb;
+}

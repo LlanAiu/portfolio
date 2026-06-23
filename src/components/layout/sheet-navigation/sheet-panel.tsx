@@ -1,5 +1,5 @@
+/** biome-ignore-all lint/a11y/noStaticElementInteractions: Needed for this type of interaction */
 // builtin
-
 
 // external
 
@@ -12,20 +12,24 @@ import "./sheet-panel.css"
 interface SheetPanelProps {
     section: NavigationSection;
     sheetTransform: SheetTransform;
+    onHover: () => void;
     transformActive: boolean;
     isMain: boolean;
     children?: React.ReactNode;
 }
 
-export default function SheetPanel({ section, sheetTransform, transformActive, isMain, children }: SheetPanelProps) {
+export default function SheetPanel({ section, sheetTransform, onHover, transformActive, isMain, children }: SheetPanelProps) {
     return (
         <div
-            className="section-title absolute w-full h-full text-left top-0 z-30 bg-gray-100"
+            className="section-title absolute w-full h-full text-left top-0 z-30 bg-gray-100 border-2"
+            onMouseEnter={onHover}
             style={sheetTransformToCSS(sheetTransform, transformActive)}
         >
             {
                 isMain ?
-                    children :
+                    <div className="normal-writing text-left w-full h-full">
+                        {children}
+                    </div> :
                     <h3>{section.name}</h3>
             }
         </div>

@@ -1,7 +1,0 @@
-.section-title {
-    writing-mode: vertical-rl;
-    transform-origin: bottom right;
-    transition:
-        rotate 0.4s ease-in-out,
-        translate 0.4s ease-in-out;
-}

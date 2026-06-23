@@ -1,11 +1,12 @@
+/** biome-ignore-all lint/a11y/noStaticElementInteractions: Needed for custom functionality */
 // builtin
 
 // external
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 // internal
 import type { NavigationSection } from "@/lib/layout/navigation-sections";
-import { buildBaseTransformSet, type SheetTransform } from "@/lib/layout/sheet-transform";
+import { buildBaseTransformSet, reviseTransformSetForHover, type SheetTransform } from "@/lib/layout/sheet-transform";
 import SheetPanel from "./sheet-panel";
 
 
@@ -18,7 +19,8 @@ interface SheetNavigationProps {
 
 export default function SheetNavigation({ activeEndpoint, sections, children }: SheetNavigationProps) {
     const [isActive, setIsActive] = useState(false);
-    const [transforms, setTransform] = useState<SheetTransform[]>(buildBaseTransformSet(sections.length));
+    const baseTransforms = useMemo<SheetTransform[]>(() => buildBaseTransformSet(sections.length), [sections.length]);
+    const [transforms, setTransform] = useState<SheetTransform[]>(baseTransforms);
 
     const sectionCopy = [
         ...sections.filter(section => section.endpoint !== activeEndpoint)
@@ -28,42 +30,50 @@ export default function SheetNavigation({ activeEndpoint, sections, children }: 
         sectionCopy.push(active);
     }
 
+    function setFocusedSection(index: number) {
+        setTransform(_ => reviseTransformSetForHover(baseTransforms, index));
+    }
+
     return (
         <div className="relative h-full">
             <button
                 type="button"
-                className="absolute bottom-1 right-1 z-40"
+                className="absolute bottom-1 right-1 z-40 bg-blue-300 p-2 rounded-md"
                 onClick={() => setIsActive(prev => !prev)}
             >
                 Toggle
             </button>
 
-            {
-                sectionCopy.map((section, index) => {
-                    if (index === sections.length - 1) {
+            <div onMouseLeave={() => setTransform(_ => baseTransforms)}>
+                {
+                    sectionCopy.map((section, index) => {
+                        if (index === sections.length - 1) {
+                            return (
+                                <SheetPanel
+                                    key={section.name}
+                                    section={section}
+                                    sheetTransform={transforms[index]}
+                                    onHover={() => setFocusedSection(index)}
+                                    transformActive={isActive}
+                                    isMain={true}
+                                >
+                                    {children}
+                                </SheetPanel>
+                            )
+                        }
                         return (
                             <SheetPanel
                                 key={section.name}
                                 section={section}
                                 sheetTransform={transforms[index]}
+                                onHover={() => setFocusedSection(index)}
                                 transformActive={isActive}
-                                isMain={true}
-                            >
-                                {children}
-                            </SheetPanel>
-                        )
-                    }
-                    return (
-                        <SheetPanel
-                            key={section.name}
-                            section={section}
-                            sheetTransform={transforms[index]}
-                            transformActive={isActive}
-                            isMain={false}
-                        />
-                    );
-                })
-            }
+                                isMain={false}
+                            />
+                        );
+                    })
+                }
+            </div>
         </div>
     );
 }
