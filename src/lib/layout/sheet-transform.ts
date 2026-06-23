@@ -1,14 +1,28 @@
 // builtin
 
 // external
+import type { CSSProperties } from "react";
 
 // internal
 
 
-interface SheetTransform {
+export interface SheetTransform {
     rotate_degs: number;
     translate_up: number;
     translate_left: number;
+}
+
+export function sheetTransformToCSS(transform: SheetTransform, active: boolean): CSSProperties {
+    if (active) {
+        return {
+            rotate: "0deg",
+            translate: "0px 0px 0px"
+        }
+    }
+    return {
+        rotate: `${-transform.rotate_degs}deg`,
+        translate: `${-transform.translate_left}px ${transform.translate_up}px 0px`
+    }
 }
 
 export function buildBaseTransformSet(pages: number): SheetTransform[] {
