@@ -15,13 +15,13 @@ export interface SheetTransform {
 export function sheetTransformToCSS(transform: SheetTransform, active: boolean): CSSProperties {
     if (active) {
         return {
-            rotate: "0deg",
-            translate: "0px 0px 0px"
+            rotate: `${-transform.rotate_degs}deg`,
+            translate: `${-transform.translate_left}px ${transform.translate_up}px 0px`
         }
     }
     return {
-        rotate: `${-transform.rotate_degs}deg`,
-        translate: `${-transform.translate_left}px ${transform.translate_up}px 0px`
+        rotate: "0deg",
+        translate: "0px 0px 0px"
     }
 }
 
@@ -45,7 +45,7 @@ export function reviseTransformSetForHover(baseTransforms: SheetTransform[], hov
     for (let i = hoverIndex + 1; i < baseTransforms.length; i++) {
         newTransforms[i] = {
             ...baseTransforms[i],
-            translate_left: baseTransforms[i].translate_left + 15
+            translate_left: baseTransforms[i].translate_left + 25
         };
     }
 

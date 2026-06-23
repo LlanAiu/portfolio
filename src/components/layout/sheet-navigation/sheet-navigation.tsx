@@ -25,9 +25,9 @@ export default function SheetNavigation({ activeEndpoint, sections, children }: 
     const sectionCopy = [
         ...sections.filter(section => section.endpoint !== activeEndpoint)
     ];
-    const active = sections.find(section => section.endpoint === activeEndpoint);
-    if (active) {
-        sectionCopy.push(active);
+    const activeSection = sections.find(section => section.endpoint === activeEndpoint);
+    if (activeSection) {
+        sectionCopy.push(activeSection);
     }
 
     function setFocusedSection(index: number) {
