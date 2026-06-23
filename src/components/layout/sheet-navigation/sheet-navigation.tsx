@@ -21,14 +21,17 @@ export default function SheetNavigation({ activeEndpoint, sections, children }: 
     const [isActive, setIsActive] = useState(false);
     const baseTransforms = useMemo<SheetTransform[]>(() => buildBaseTransformSet(sections.length), [sections.length]);
     const [transforms, setTransform] = useState<SheetTransform[]>(baseTransforms);
+    const displaySections = useMemo<NavigationSection[]>(() => {
+        const sectionCopy = [
+            ...sections.filter(section => section.endpoint !== activeEndpoint)
+        ];
+        const activeSection = sections.find(section => section.endpoint === activeEndpoint);
+        if (activeSection) {
+            sectionCopy.push(activeSection);
+        }
+        return sectionCopy;
+    }, [sections, activeEndpoint])
 
-    const sectionCopy = [
-        ...sections.filter(section => section.endpoint !== activeEndpoint)
-    ];
-    const activeSection = sections.find(section => section.endpoint === activeEndpoint);
-    if (activeSection) {
-        sectionCopy.push(activeSection);
-    }
 
     function setFocusedSection(index: number) {
         setTransform(_ => reviseTransformSetForHover(baseTransforms, index));
@@ -46,7 +49,7 @@ export default function SheetNavigation({ activeEndpoint, sections, children }: 
 
             <div onMouseLeave={() => setTransform(_ => baseTransforms)}>
                 {
-                    sectionCopy.map((section, index) => {
+                    displaySections.map((section, index) => {
                         if (index === sections.length - 1) {
                             return (
                                 <SheetPanel

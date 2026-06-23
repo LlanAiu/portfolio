@@ -25,13 +25,13 @@ export default function NavTestPage() {
         },
         {
             name: "Current",
-            endpoint: "/"
+            endpoint: "/current"
         }
     ]
 
     return (
         <SheetNavigation
-            activeEndpoint={"/home"}
+            activeEndpoint={"/"}
             sections={sections}
         >
             <TegakiText id="main" className="text-4xl">Why Hello There!</TegakiText>
