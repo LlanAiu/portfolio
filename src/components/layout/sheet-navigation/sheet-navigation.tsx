@@ -54,6 +54,7 @@ export default function SheetNavigation({ activeEndpoint, sections, children }: 
                             return (
                                 <SheetPanel
                                     key={section.name}
+                                    index={index}
                                     section={section}
                                     sheetTransform={transforms[index]}
                                     onHover={() => setFocusedSection(index)}
@@ -67,6 +68,7 @@ export default function SheetNavigation({ activeEndpoint, sections, children }: 
                         return (
                             <SheetPanel
                                 key={section.name}
+                                index={index}
                                 section={section}
                                 sheetTransform={transforms[index]}
                                 onHover={() => setFocusedSection(index)}

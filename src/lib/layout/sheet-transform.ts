@@ -30,9 +30,9 @@ export function buildBaseTransformSet(pages: number): SheetTransform[] {
 
     for (let i = 0; i < pages; i++) {
         transforms.push({
-            rotate_degs: 1.2 * i,
-            translate_up: 5 + 2 * i * (- 1) ** i,
-            translate_left: 15 * i
+            rotate_degs: 1.3 * i,
+            translate_up: 5 + 2.4 * i * (- 1) ** i,
+            translate_left: 20 * i
         });
     }
 
@@ -45,7 +45,7 @@ export function reviseTransformSetForHover(baseTransforms: SheetTransform[], hov
     for (let i = hoverIndex + 1; i < baseTransforms.length; i++) {
         newTransforms[i] = {
             ...baseTransforms[i],
-            translate_left: baseTransforms[i].translate_left + 25
+            translate_left: baseTransforms[i].translate_left + 35
         };
     }
 
