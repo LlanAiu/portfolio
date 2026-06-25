@@ -31,7 +31,6 @@ export default function NavTestPage() {
 
     return (
         <SheetNavigation
-            activeEndpoint={"/"}
             sections={sections}
         >
             <TegakiText id="main" className="text-4xl">Why Hello There!</TegakiText>

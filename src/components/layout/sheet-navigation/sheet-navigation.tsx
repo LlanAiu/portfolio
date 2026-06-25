@@ -1,4 +1,5 @@
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: Needed for custom functionality */
+"use client"
 // builtin
 
 // external
@@ -8,16 +9,17 @@ import { useMemo, useState } from "react";
 import type { NavigationSection } from "@/lib/layout/navigation-sections";
 import { buildBaseTransformSet, reviseTransformSetForHover, type SheetTransform } from "@/lib/layout/sheet-transform";
 import SheetPanel from "./sheet-panel";
+import { usePathname } from "next/navigation";
 
 
 interface SheetNavigationProps {
-    activeEndpoint: string;
     sections: NavigationSection[];
     children: React.ReactNode;
 }
 
 
-export default function SheetNavigation({ activeEndpoint, sections, children }: SheetNavigationProps) {
+export default function SheetNavigation({ sections, children }: SheetNavigationProps) {
+    const activeEndpoint = usePathname();
     const [isActive, setIsActive] = useState(false);
     const baseTransforms = useMemo<SheetTransform[]>(() => buildBaseTransformSet(sections.length), [sections.length]);
     const [transforms, setTransform] = useState<SheetTransform[]>(baseTransforms);
