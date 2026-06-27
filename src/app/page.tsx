@@ -53,13 +53,13 @@ export default function Home() {
     return (
         <div className='pt-6 text-center space-y-10 md:space-y-16'>
             <SequentialAnimation id='home' context={{
-                time: { mode: 'uncontrolled', speed: 2 }
+                time: { mode: 'uncontrolled', speed: 3 }
             }}>
                 <TegakiText id='hello'>Hello There!</TegakiText>
                 <TegakiText id='name'>I'm Alan Liu.</TegakiText>
                 <TegakiText id='suggestion'>Since you're here already, why don't we</TegakiText>
                 <LinkAnimation id='link' href={links[display].link} ref={linkRef}>
-                    <RewritingTegakiText id='link-text'>{links[display].text}</RewritingTegakiText>
+                    <RewritingTegakiText id='link-text' className='m-auto'>{links[display].text}</RewritingTegakiText>
                 </LinkAnimation>
             </SequentialAnimation>
         </div>

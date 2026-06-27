@@ -5,6 +5,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { TegakiRenderer, type TegakiRendererHandle } from "tegaki";
 
 // internal
+import "./rewriting-tegaki-text.css"
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
 import type { ForwardingComponent } from "@/lib/util/forwarding-component";
 import { TegakiContext } from "@/lib/animation/tegaki-context";
@@ -19,15 +20,20 @@ export default function RewritingTegakiText({ children: current, style, classNam
     const ref1 = useRef<TegakiRendererHandle>(null);
     const ref2 = useRef<TegakiRendererHandle>(null);
 
-    const [text1, setText1] = useState("");
-    const [text2, setText2] = useState("");
+    const [text1, setText1] = useState(current);
+    const [text2, setText2] = useState(current);
 
-    const [playFirst, setPlayFirst] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [playFirst, setPlayFirst] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: plain incorrect
     useEffect(() => {
-        computeNewTimeline()
+        if (isLoaded) {
+            computeNewTimeline();
+        } else {
+            setIsLoaded(_ => true);
+        }
     }, [current])
 
     async function computeNewTimeline() {
@@ -58,8 +64,10 @@ export default function RewritingTegakiText({ children: current, style, classNam
 
         if (playFirst) {
             setText2(current);
+            setTimeout(() => setText1(current), 300);
         } else {
             setText1(current);
+            setTimeout(() => setText2(current), 300);
         }
 
         setPlayFirst(prev => !prev);
@@ -67,11 +75,7 @@ export default function RewritingTegakiText({ children: current, style, classNam
         await new Promise(resolve => setTimeout(resolve, 300));
 
         targetEngine.play();
-        if (playFirst) {
-            setText2(current);
-        } else {
-            setText1(current);
-        }
+        currentEngine.seek(1);
         setIsTransitioning(false);
     }
 
@@ -82,10 +86,9 @@ export default function RewritingTegakiText({ children: current, style, classNam
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
+                className="absolute-child"
                 style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
+                    position: "absolute",
                     zIndex: playFirst ? 2 : 1,
                     opacity: playFirst ? 1 : 0,
                     transition: playFirst ? 'opacity 0.3s' : 'opacity 0.3s ease-in-out',
@@ -100,10 +103,9 @@ export default function RewritingTegakiText({ children: current, style, classNam
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
+                className="absolute-child"
                 style={{
                     position: "absolute",
-                    top: 0,
-                    left: 0,
                     zIndex: playFirst ? 1 : 2,
                     opacity: playFirst ? 0 : 1,
                     transition: playFirst ? 'opacity 0.3s ease-in-out' : 'opacity 0.3s',
@@ -112,6 +114,6 @@ export default function RewritingTegakiText({ children: current, style, classNam
             >
                 {text2}
             </TegakiRenderer>
-        </div >
+        </div>
     );
 }
