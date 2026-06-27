@@ -5,17 +5,18 @@ import { cloneElement, type ReactElement, useState } from "react";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
+import { TegakiContext, type TegakiContextProvider } from "@/lib/animation/tegaki-context";
 
 
-interface SequentialAnimationProps extends TimedAnimation {
+interface SequentialAnimationProps extends TimedAnimation, TegakiContextProvider {
     children: ReactElement<TimedAnimation>[];
 }
 
-export default function SequentialAnimation({ children, onComplete }: SequentialAnimationProps) {
+export default function SequentialAnimation({ children, onComplete, context }: SequentialAnimationProps) {
     const [playedCount, setPlayedCount] = useState(1);
 
     return (
-        <>
+        <TegakiContext value={context ?? {}}>
             {children.map((child, index) => {
                 if (index >= playedCount) return null;
 
@@ -34,6 +35,6 @@ export default function SequentialAnimation({ children, onComplete }: Sequential
 
                 return cloneElement(child, sequenceProps)
             })}
-        </>
+        </TegakiContext>
     );
 }

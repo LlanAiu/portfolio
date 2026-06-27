@@ -5,13 +5,14 @@ import { cloneElement, type ReactElement, useEffect, useState } from "react";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
+import { TegakiContext, type TegakiContextProvider } from "@/lib/animation/tegaki-context";
 
 
-interface ParallelAnimationProps extends TimedAnimation {
+interface ParallelAnimationProps extends TimedAnimation, TegakiContextProvider {
     children: ReactElement<TimedAnimation>[];
 }
 
-export default function ParallelAnimation({ children, onComplete }: ParallelAnimationProps) {
+export default function ParallelAnimation({ children, onComplete, context }: ParallelAnimationProps) {
     const [finished, setFinished] = useState(0);
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: Not correct
@@ -22,7 +23,7 @@ export default function ParallelAnimation({ children, onComplete }: ParallelAnim
     }, [finished])
 
     return (
-        <>
+        <TegakiContext value={context ?? {}}>
             {
                 children.map((child) => {
                     const parallelProps: Partial<TimedAnimation> = {
@@ -37,6 +38,6 @@ export default function ParallelAnimation({ children, onComplete }: ParallelAnim
                     return cloneElement(child, parallelProps);
                 })
             }
-        </>
+        </TegakiContext>
     );
 }
