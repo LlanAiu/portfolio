@@ -64,6 +64,7 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
                                     section={section}
                                     sheetTransform={transforms[index]}
                                     onHover={() => setFocusedSection(index)}
+                                    closePanel={() => setIsActive(_ => false)}
                                     transformActive={isActive}
                                     isMain={true}
                                 >
@@ -78,6 +79,7 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
                                 section={section}
                                 sheetTransform={transforms[index]}
                                 onHover={() => setFocusedSection(index)}
+                                closePanel={() => setIsActive(_ => false)}
                                 transformActive={isActive}
                                 isMain={false}
                             />

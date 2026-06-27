@@ -1,4 +1,5 @@
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: Needed for this type of interaction */
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: TODO -- will add later */
 // builtin
 
 // external
@@ -15,17 +16,19 @@ interface SheetPanelProps {
     section: NavigationSection;
     sheetTransform: SheetTransform;
     onHover: () => void;
+    closePanel: () => void;
     transformActive: boolean;
     isMain: boolean;
     children?: React.ReactNode;
 }
 
-export default function SheetPanel({ index, section, sheetTransform, onHover, transformActive, isMain, children }: SheetPanelProps) {
+export default function SheetPanel({ index, section, sheetTransform, onHover, closePanel, transformActive, isMain, children }: SheetPanelProps) {
     if (isMain) {
         return (
             <div
                 className="section-title p-10 absolute w-full h-full text-left top-0 bg-gray-100 border-2"
                 onMouseEnter={onHover}
+                onClick={closePanel}
                 style={{ ...sheetTransformToCSS(sheetTransform, transformActive), zIndex: index }}
             >
                 <div className="normal-writing text-left w-full h-full">
