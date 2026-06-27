@@ -15,7 +15,7 @@ export default function SequentialAnimation({ children, onComplete }: Sequential
     const [playedCount, setPlayedCount] = useState(1);
 
     return (
-        <div>
+        <>
             {children.map((child, index) => {
                 if (index >= playedCount) return null;
 
@@ -34,6 +34,6 @@ export default function SequentialAnimation({ children, onComplete }: Sequential
 
                 return cloneElement(child, sequenceProps)
             })}
-        </div>
+        </>
     );
 }

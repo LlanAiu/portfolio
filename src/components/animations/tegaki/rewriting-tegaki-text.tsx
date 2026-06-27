@@ -1,19 +1,20 @@
 // builtin
 
 // external
-
-// internal
-import type { TimedAnimation } from "@/lib/animation/timed-animation";
 import { useEffect, useRef, useState } from "react";
 import { TegakiRenderer, type TegakiRendererHandle } from "tegaki";
 import bundle from "tegaki/fonts/caveat";
 
+// internal
+import type { TimedAnimation } from "@/lib/animation/timed-animation";
+import type { ForwardingComponent } from "@/lib/util/forwarding-component";
 
-interface RewritingTegakiTextProps extends TimedAnimation {
+
+interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
     children: string;
 }
 
-export default function RewritingTegakiText({ children: current }: RewritingTegakiTextProps) {
+export default function RewritingTegakiText({ children: current, style, className }: RewritingTegakiTextProps) {
     const ref1 = useRef<TegakiRendererHandle>(null);
     const ref2 = useRef<TegakiRendererHandle>(null);
 
@@ -74,7 +75,7 @@ export default function RewritingTegakiText({ children: current }: RewritingTega
     }
 
     return (
-        <div style={{ position: 'relative', height: 80 }}>
+        <div className={className} style={{ ...style, position: 'relative', height: 80 }}>
             <TegakiRenderer
                 ref={ref1}
                 font={bundle}

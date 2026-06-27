@@ -22,7 +22,7 @@ export default function ParallelAnimation({ children, onComplete }: ParallelAnim
     }, [finished])
 
     return (
-        <div>
+        <>
             {
                 children.map((child) => {
                     const parallelProps: Partial<TimedAnimation> = {
@@ -37,6 +37,6 @@ export default function ParallelAnimation({ children, onComplete }: ParallelAnim
                     return cloneElement(child, parallelProps);
                 })
             }
-        </div>
+        </>
     );
 }

@@ -14,11 +14,11 @@ export interface TegakiListProps extends TimedAnimation, ForwardingComponent {
     items: string[];
 }
 
-export default function TegakiList({ items, onComplete }: TegakiListProps) {
+export default function TegakiList({ items, onComplete, style, className }: TegakiListProps) {
     const [visibleCount, setVisibleCount] = useState(1);
 
     return (
-        <ul style={{ listStyleType: 'none', paddingLeft: 0, fontSize: '48px' }}>
+        <ul className={className} style={{ ...style, listStyleType: 'none', paddingLeft: 0, fontSize: '48px' }}>
             {items.map((text, index) => {
                 if (index >= visibleCount) return null;
 
