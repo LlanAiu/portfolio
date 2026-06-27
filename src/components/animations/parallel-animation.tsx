@@ -5,7 +5,7 @@ import { cloneElement, type ReactElement, useEffect, useState } from "react";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
-import { TegakiContext, type TegakiContextProvider } from "@/lib/animation/tegaki-context";
+import { mergeWithDefault, TegakiContext, type TegakiSettings, type TegakiContextProvider } from "@/lib/animation/tegaki-context";
 
 
 interface ParallelAnimationProps extends TimedAnimation, TegakiContextProvider {
@@ -22,8 +22,11 @@ export default function ParallelAnimation({ children, onComplete, context }: Par
         }
     }, [finished])
 
+
+    const merged: TegakiSettings = mergeWithDefault(context);
+
     return (
-        <TegakiContext value={context ?? {}}>
+        <TegakiContext value={merged ?? {}}>
             {
                 children.map((child) => {
                     const parallelProps: Partial<TimedAnimation> = {

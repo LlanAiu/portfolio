@@ -1,13 +1,13 @@
 // builtin
 
 // external
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { TegakiRenderer } from "tegaki";
-import bundle from "tegaki/fonts/caveat";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
 import type { ForwardingComponent } from "@/lib/util/forwarding-component";
+import { TegakiContext } from "@/lib/animation/tegaki-context";
 
 
 export interface TegakiListProps extends TimedAnimation, ForwardingComponent {
@@ -15,6 +15,7 @@ export interface TegakiListProps extends TimedAnimation, ForwardingComponent {
 }
 
 export default function TegakiList({ items, onComplete, style, className }: TegakiListProps) {
+    const context = useContext(TegakiContext);
     const [visibleCount, setVisibleCount] = useState(1);
 
     return (
@@ -26,7 +27,9 @@ export default function TegakiList({ items, onComplete, style, className }: Tega
                     <li key={text} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <span>•</span>
                         <TegakiRenderer
-                            font={bundle}
+                            font={context.font}
+                            time={context.time}
+                            effects={context.effects}
                             onComplete={() => {
                                 if (visibleCount === index + 1) {
                                     if (visibleCount < items.length) {

@@ -2,11 +2,12 @@
 
 // external
 import { TegakiRenderer } from "tegaki";
-import bundle from "tegaki/fonts/caveat";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
 import type { ForwardingComponent } from "@/lib/util/forwarding-component";
+import { useContext } from "react";
+import { TegakiContext } from "@/lib/animation/tegaki-context";
 
 
 interface TegakiTextProps extends TimedAnimation, ForwardingComponent {
@@ -14,10 +15,13 @@ interface TegakiTextProps extends TimedAnimation, ForwardingComponent {
 }
 
 export default function TegakiText({ children, className, style, onComplete }: TegakiTextProps) {
+    const context = useContext(TegakiContext);
 
     return (
         <TegakiRenderer
-            font={bundle}
+            font={context.font}
+            time={context.time}
+            effects={context.effects}
             className={className}
             style={style}
             onComplete={onComplete}

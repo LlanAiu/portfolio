@@ -1,13 +1,13 @@
 // builtin
 
 // external
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TegakiRenderer, type TegakiRendererHandle } from "tegaki";
-import bundle from "tegaki/fonts/caveat";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
 import type { ForwardingComponent } from "@/lib/util/forwarding-component";
+import { TegakiContext } from "@/lib/animation/tegaki-context";
 
 
 interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
@@ -15,6 +15,7 @@ interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
 }
 
 export default function RewritingTegakiText({ children: current, style, className }: RewritingTegakiTextProps) {
+    const context = useContext(TegakiContext);
     const ref1 = useRef<TegakiRendererHandle>(null);
     const ref2 = useRef<TegakiRendererHandle>(null);
 
@@ -78,8 +79,9 @@ export default function RewritingTegakiText({ children: current, style, classNam
         <div className={className} style={{ ...style, position: 'relative', height: 80 }}>
             <TegakiRenderer
                 ref={ref1}
-                font={bundle}
-                time={{ mode: 'uncontrolled', speed: 1 }}
+                font={context.font}
+                time={context.time}
+                effects={context.effects}
                 style={{
                     position: 'absolute',
                     top: 0,
@@ -95,8 +97,9 @@ export default function RewritingTegakiText({ children: current, style, classNam
 
             <TegakiRenderer
                 ref={ref2}
-                font={bundle}
-                time={{ mode: 'uncontrolled', speed: 1 }}
+                font={context.font}
+                time={context.time}
+                effects={context.effects}
                 style={{
                     position: "absolute",
                     top: 0,

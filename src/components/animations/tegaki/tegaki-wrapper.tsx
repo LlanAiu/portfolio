@@ -4,7 +4,7 @@
 import { cloneElement, type ReactElement } from "react";
 
 // internal
-import { TegakiContext, type TegakiContextProvider } from "@/lib/animation/tegaki-context";
+import { mergeWithDefault, TegakiContext, type TegakiSettings, type TegakiContextProvider } from "@/lib/animation/tegaki-context";
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
 
 
@@ -14,8 +14,10 @@ interface TegakiWrapperProps extends TimedAnimation, TegakiContextProvider {
 
 export default function TegakiWrapper({ children, onComplete, context }: TegakiWrapperProps) {
 
+    const merged: TegakiSettings = mergeWithDefault(context);
+
     return (
-        <TegakiContext value={context ?? {}}>
+        <TegakiContext value={merged ?? {}}>
             {
                 cloneElement(children, {
                     onComplete

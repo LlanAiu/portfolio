@@ -51,9 +51,10 @@ export default function Home() {
     ];
 
     return (
-        <div className='w-full h-full'>
-
-            <SequentialAnimation id='home'>
+        <div className='pt-6 text-center space-y-10 md:space-y-16'>
+            <SequentialAnimation id='home' context={{
+                time: { mode: 'uncontrolled', speed: 2 }
+            }}>
                 <TegakiText id='hello'>Hello There!</TegakiText>
                 <TegakiText id='name'>I'm Alan Liu.</TegakiText>
                 <TegakiText id='suggestion'>Since you're here already, why don't we</TegakiText>

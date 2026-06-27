@@ -17,6 +17,12 @@ export interface TegakiContextProvider {
     context?: TegakiSettings;
 }
 
-export const TegakiContext = createContext<TegakiSettings>({
-    font: bundle
-});
+export const TegakiContext = createContext<TegakiSettings>(mergeWithDefault(undefined));
+
+export function mergeWithDefault(settings: TegakiSettings | undefined): TegakiSettings {
+    return {
+        font: settings?.font ?? bundle,
+        time: settings?.time,
+        effects: settings?.effects,
+    }
+}

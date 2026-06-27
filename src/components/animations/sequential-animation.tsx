@@ -5,7 +5,7 @@ import { cloneElement, type ReactElement, useState } from "react";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
-import { TegakiContext, type TegakiContextProvider } from "@/lib/animation/tegaki-context";
+import { mergeWithDefault, TegakiContext, type TegakiSettings, type TegakiContextProvider } from "@/lib/animation/tegaki-context";
 
 
 interface SequentialAnimationProps extends TimedAnimation, TegakiContextProvider {
@@ -15,8 +15,10 @@ interface SequentialAnimationProps extends TimedAnimation, TegakiContextProvider
 export default function SequentialAnimation({ children, onComplete, context }: SequentialAnimationProps) {
     const [playedCount, setPlayedCount] = useState(1);
 
+    const merged: TegakiSettings = mergeWithDefault(context);
+
     return (
-        <TegakiContext value={context ?? {}}>
+        <TegakiContext value={merged ?? {}}>
             {children.map((child, index) => {
                 if (index >= playedCount) return null;
 
