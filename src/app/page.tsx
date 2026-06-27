@@ -8,7 +8,10 @@ import { motion } from 'motion/react';
 import clsx from 'clsx';
 
 // internal
-import { TextChangeDelay, TextInitialY, TextSwapFade } from '@/lib/animation/animation-utils';
+import { TextChangeDelay } from '@/lib/animation/animation-utils';
+import SequentialAnimation from '@/components/animations/sequential-animation';
+import TegakiText from '@/components/animations/tegaki/tegaki-text';
+import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
 
 
 export default function Home() {
@@ -41,8 +44,8 @@ export default function Home() {
             setInitialText('Tap on screen');
         }
 
-        window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('touchstart', handleTouchStart);
+        window.addEventListener('keydown', handleKeyDown);
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
@@ -51,55 +54,21 @@ export default function Home() {
     }, [display]);
 
     const links = [
-        { text: 'contemplate a day in my life', link: './current' },
-        { text: 'read my sparse autobiography', link: './about' },
-        { text: 'attend my project gallery', link: './projects' },
+        { text: 'introduce ourselves? (or just me)', link: './about' },
+        { text: 'catch up on how life\'s going?', link: './current' },
+        { text: 'take a look at some projects?', link: './projects' },
         { text: initialText, link: './' }
     ];
 
-    const text = TextInitialY;
-
-    const linkVar = TextSwapFade;
-
     return (
-        <motion.div
-            className='w-screen h-screen'
-            animate={{ backgroundColor: '#F5F0F6', color: '#2B4162' }}
-        >
-            <motion.div
-                className='pt-24 text-center space-y-10 md:space-y-16'
-                initial='hidden'
-                animate='visible'
-                variants={text}
-            >
-                <motion.h1 className='text-4xl md:text-7xl' variants={text}><b>Hello There!</b></motion.h1>
-                <motion.h1 className='text-3xl md:text-6xl' variants={text}>I'm Alan Liu</motion.h1>
-                <motion.p className='text-xl md:text-3xl' variants={text}>Since you're here already, why don't you...</motion.p>
-                <motion.div className='my-5 md:my-10' variants={text}>
-                    <Link href={links[display].link} ref={linkRef}>
-                        <motion.p
-                            className='text-xl md:text-4xl absolute w-full text-center'
-                            animate={clsx({
-                                'in': anim,
-                                'out': !anim
-                            })}
-                            variants={linkVar}
-                        >
-                            {links[display].text}
-                        </motion.p>
-                        <motion.p
-                            className='text-xl md:text-4xl absolute w-full text-center'
-                            animate={clsx({
-                                'out': anim,
-                                'in': !anim
-                            })}
-                            variants={linkVar}
-                        >
-                            {links[display].text}
-                        </motion.p>
-                    </Link>
-                </motion.div>
-            </motion.div>
-        </motion.div>
+        <div className='w-full h-full'>
+
+            <SequentialAnimation id='home'>
+                <TegakiText id='hello'>Hello There!</TegakiText>
+                <TegakiText id='name'>I'm Alan Liu.</TegakiText>
+                <TegakiText id='suggestion'>Since you're here already, why don't we</TegakiText>
+                <RewritingTegakiText id='link'>{links[display].text}</RewritingTegakiText>
+            </SequentialAnimation>
+        </div>
     );
 }
