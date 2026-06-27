@@ -3,7 +3,7 @@
 // builtin
 
 // external
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // internal
 import type { NavigationSection } from "@/lib/layout/navigation-sections";
@@ -34,6 +34,10 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
         return sectionCopy;
     }, [sections, activeEndpoint])
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: close on endpoint change
+    useEffect(() => {
+        setIsActive(_ => false);
+    }, [activeEndpoint]);
 
     function setFocusedSection(index: number) {
         setTransform(_ => reviseTransformSetForHover(baseTransforms, index));
