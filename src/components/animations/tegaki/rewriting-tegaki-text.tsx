@@ -20,7 +20,7 @@ export default function RewritingTegakiText({ children: current }: RewritingTega
     const [text1, setText1] = useState("");
     const [text2, setText2] = useState("");
 
-    const [playFirst, setPlayFirst] = useState(true);
+    const [playFirst, setPlayFirst] = useState(false);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: plain incorrect
@@ -83,7 +83,6 @@ export default function RewritingTegakiText({ children: current }: RewritingTega
                     position: 'absolute',
                     top: 0,
                     left: 0,
-                    fontSize: 48,
                     zIndex: playFirst ? 2 : 1,
                     opacity: playFirst ? 1 : 0,
                     transition: playFirst ? 'opacity 0.3s' : 'opacity 0.3s ease-in-out',
@@ -101,7 +100,6 @@ export default function RewritingTegakiText({ children: current }: RewritingTega
                     position: "absolute",
                     top: 0,
                     left: 0,
-                    fontSize: 48,
                     zIndex: playFirst ? 1 : 2,
                     opacity: playFirst ? 0 : 1,
                     transition: playFirst ? 'opacity 0.3s ease-in-out' : 'opacity 0.3s',
