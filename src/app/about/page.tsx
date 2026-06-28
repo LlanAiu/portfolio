@@ -110,7 +110,7 @@ export default function AboutPage() {
                     </TegakiText>
                     <RewritingTegakiText
                         id='fact'
-                        className='text-3xl md:text-5xl h-36'
+                        className='text-3xl md:text-5xl'
                     >
                         {descriptions[index].text}
                     </RewritingTegakiText>

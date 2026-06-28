@@ -88,6 +88,7 @@ export default function RewritingTegakiText({ children: current, style, classNam
                 effects={context.effects}
                 className="absolute-child"
                 style={{
+                    width: "max-content",
                     position: "absolute",
                     zIndex: playFirst ? 2 : 1,
                     opacity: playFirst ? 1 : 0,
@@ -105,6 +106,7 @@ export default function RewritingTegakiText({ children: current, style, classNam
                 effects={context.effects}
                 className="absolute-child"
                 style={{
+                    width: "max-content",
                     position: "absolute",
                     zIndex: playFirst ? 1 : 2,
                     opacity: playFirst ? 0 : 1,
