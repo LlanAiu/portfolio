@@ -40,13 +40,13 @@ export default function RootLayout({
             endpoint: "/projects",
         },
         {
+            name: "Current",
+            endpoint: "/current"
+        },
+        {
             name: "About",
             endpoint: "/about"
         },
-        {
-            name: "Current",
-            endpoint: "/current"
-        }
     ]
 
     return (
