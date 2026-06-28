@@ -14,7 +14,6 @@ import bellTowerImage from '../../../public/BellTower.jpg';
 import kouryImage from '../../../public/Koury.jpg';
 import roboticsImage from '../../../public/Robotics.jpg';
 import cardsImage from '../../../public/Cards.jpg';
-import Navigation from '@/components/layout/nav-bar';
 import { TextChangeDelay, TextInitialX, TextSwapFade } from '@/lib/animation/animation-utils';
 import SequentialAnimation from '@/components/animations/sequential-animation';
 import TegakiText from '@/components/animations/tegaki/tegaki-text';
@@ -110,6 +109,7 @@ export default function AboutPage() {
                     </TegakiText>
                     <RewritingTegakiText
                         id='fact'
+                        orient='orient-top-left'
                         className='text-3xl md:text-5xl'
                     >
                         {descriptions[index].text}

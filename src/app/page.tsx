@@ -59,7 +59,7 @@ export default function Home() {
                 <TegakiText id='name' className='text-5xl'>I'm Alan Liu.</TegakiText>
                 <TegakiText id='suggestion' className='text-3xl'>Since you're here already, why don't we</TegakiText>
                 <LinkAnimation id='link' href={links[display].link} ref={linkRef}>
-                    <RewritingTegakiText id='link-text' className='text-4xl'>{links[display].text}</RewritingTegakiText>
+                    <RewritingTegakiText id='link-text' orient='orient-center' className='text-4xl'>{links[display].text}</RewritingTegakiText>
                 </LinkAnimation>
             </SequentialAnimation>
         </div>

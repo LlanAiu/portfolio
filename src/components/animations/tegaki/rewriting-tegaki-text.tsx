@@ -13,9 +13,10 @@ import { TegakiContext } from "@/lib/animation/tegaki-context";
 
 interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
     children: string;
+    orient: "orient-center" | "orient-center-left" | "orient-top-left";
 }
 
-export default function RewritingTegakiText({ children: current, style, className }: RewritingTegakiTextProps) {
+export default function RewritingTegakiText({ children: current, orient, style, className }: RewritingTegakiTextProps) {
     const context = useContext(TegakiContext);
     const ref1 = useRef<TegakiRendererHandle>(null);
     const ref2 = useRef<TegakiRendererHandle>(null);
@@ -86,7 +87,7 @@ export default function RewritingTegakiText({ children: current, style, classNam
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
-                className="absolute-child"
+                className={orient}
                 style={{
                     width: "max-content",
                     position: "absolute",
@@ -104,7 +105,7 @@ export default function RewritingTegakiText({ children: current, style, classNam
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
-                className="absolute-child"
+                className={orient}
                 style={{
                     width: "max-content",
                     position: "absolute",
