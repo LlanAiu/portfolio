@@ -5,28 +5,22 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import clsx from 'clsx';
 
 // internal
-import Navigation from '@/components/layout/nav-bar';
-import { TextChangeDelay, TextInitialX, TextSwapFade } from '@/lib/animation/animation-utils';
+import { TextChangeDelay, TextInitialX } from '@/lib/animation/animation-utils';
+import SequentialAnimation from '@/components/animations/sequential-animation';
+import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
 
 export default function ProjectsPage() {
     const [index, setIndex] = useState(0);
-    const [swap, setSwap] = useState(false);
-    const [textSwap, setTextSwap] = useState(false);
 
     useEffect(() => {
         function swap() {
-            setSwap(prev => !prev);
             setTimeout(() => {
-                setTextSwap(prev => !prev);
             }, TextChangeDelay * 500);
             setTimeout(() => {
-                setSwap(prev => !prev);
             }, TextChangeDelay * 1000);
             setTimeout(() => {
-                setTextSwap(prev => !prev);
                 setIndex((index + 1) % projects.length);
             }, TextChangeDelay * 1500);
         }
@@ -76,65 +70,44 @@ export default function ProjectsPage() {
             description: 'An application for suggested recipes that you can make from a list of ingredients that you have',
             link: 'https://github.com/LlanAiu/recipe-api'
         },
-        {
-            title: 'PengDa',
-            description: 'A lightweight custom reinforcement learning model built using Java to play Mahjong (UI warning)',
-            link: 'https://github.com/LlanAiu/PengDa'
-        },
     ];
 
     const text = TextInitialX;
-    const textFade = TextSwapFade;
 
     return (
         <div className='w-full h-full'>
-            <Navigation path='projects' bg='#D1E5F0' text='black' bttn='#9BE9DB' hlght='#48BEFF' />
-            <motion.div
-                className='h-full'
-                animate={{ backgroundColor: '#206F62', color: '#C2FDFF' }}
+            <div
+                className='sm:pt-6 sm:pl-6 md:space-y-12 md:pt-12 md:pl-12 lg:space-y-20 lg:pt-24 lg:px-6'
             >
+                <SequentialAnimation id='projects' context={{
+                    time: { mode: 'uncontrolled', delay: 0.4, speed: 2.5 }
+                }}>
+                    <RewritingTegakiText
+                        id='title'
+                        orient='orient-top-left'
+                        className='sm:text-3xl md:text-4xl lg:text-5xl'
+                    >
+                        {projects[index].title}
+                    </RewritingTegakiText>
+                    <RewritingTegakiText
+                        id='description'
+                        orient='orient-top-left'
+                        className='sm:text-2xl md:text-3xl lg:text-4xl'
+                    >
+                        {projects[index].description}
+                    </RewritingTegakiText>
+                </SequentialAnimation>
+
                 <motion.div
-                    className='sm:pt-6 sm:pl-6 md:space-y-12 md:pt-12 md:pl-12 lg:space-y-20 lg:pt-24 lg:px-6'
-                    animate='visible'
-                    initial='hidden'
+                    className='w-max h-max rounded-md px-3 py-2.5'
+                    animate={{ backgroundColor: '#143732' }}
                     variants={text}
                 >
-                    <motion.div variants={text}>
-                        <motion.h1
-                            className='sm:text-3xl md:text-4xl lg:text-5xl'
-                            animate={clsx({
-                                'in': !swap,
-                                'out': swap
-                            })}
-                            variants={textFade}
-                        >
-                            <b>{projects[index].title}</b>
-                        </motion.h1>
-                    </motion.div>
-                    <motion.div variants={text}>
-                        <motion.p
-                            className='sm:text-2xl md:text-3xl lg:text-4xl'
-                            animate={clsx({
-                                'in': !textSwap,
-                                'out': textSwap
-                            })}
-                            variants={textFade}
-                        >
-                            {projects[index].description}
-                        </motion.p>
-                    </motion.div>
-
-                    <motion.div
-                        className='w-max h-max rounded-md px-3 py-2.5'
-                        animate={{ backgroundColor: '#143732' }}
-                        variants={text}
-                    >
-                        <Link href={projects[index].link}>
-                            <span className='sm:text-xl md:text-2xl'>Project Link</span>
-                        </Link>
-                    </motion.div>
+                    <Link href={projects[index].link}>
+                        <span className='sm:text-xl md:text-2xl'>Project Link</span>
+                    </Link>
                 </motion.div>
-            </motion.div>
+            </div>
         </div>
     );
 }

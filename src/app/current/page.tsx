@@ -48,6 +48,7 @@ export default function CurrentPage() {
         { text: 'I\'ve been catching up on sleep, this time for real' },
         { text: 'I\'ve gotten the chance to work with Terraform and AWS infra... which is fun-ish?' },
         { text: 'I\'ve played a good bit of Mahjong w/ friends/family' },
+        { text: 'I\'ve been impressed by Pi\'s agent harness' },
     ];
 
     return (

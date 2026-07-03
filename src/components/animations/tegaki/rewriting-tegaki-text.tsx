@@ -16,7 +16,7 @@ interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
     orient: "orient-center" | "orient-center-left" | "orient-top-left";
 }
 
-export default function RewritingTegakiText({ children: current, orient, style, className }: RewritingTegakiTextProps) {
+export default function RewritingTegakiText({ children: current, orient, onComplete, style, className }: RewritingTegakiTextProps) {
     const context = useContext(TegakiContext);
     const ref1 = useRef<TegakiRendererHandle>(null);
     const ref2 = useRef<TegakiRendererHandle>(null);
@@ -27,6 +27,15 @@ export default function RewritingTegakiText({ children: current, orient, style, 
     const [isLoaded, setIsLoaded] = useState(false);
     const [playFirst, setPlayFirst] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
+
+    const [hasCompleted, setHasCompleted] = useState(false);
+
+    function fireCompleteEvent() {
+        if (!hasCompleted) {
+            setHasCompleted(true);
+            onComplete?.();
+        }
+    }
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: plain incorrect
     useEffect(() => {
@@ -87,6 +96,7 @@ export default function RewritingTegakiText({ children: current, orient, style, 
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
+                onComplete={fireCompleteEvent}
                 className={orient}
                 style={{
                     width: "max-content",
@@ -105,6 +115,7 @@ export default function RewritingTegakiText({ children: current, orient, style, 
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
+                onComplete={fireCompleteEvent}
                 className={orient}
                 style={{
                     width: "max-content",
