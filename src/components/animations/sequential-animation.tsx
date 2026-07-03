@@ -25,6 +25,7 @@ export default function SequentialAnimation({ children, index, groupIndex, onRes
                 setPlayedCount(0);
             }
         } else {
+            console.log("Starting sequential group")
             setPlayedCount(0);
         }
     }, [index, groupIndex])
@@ -43,9 +44,10 @@ export default function SequentialAnimation({ children, index, groupIndex, onRes
                         setPlayedCount(prev => Math.min(prev, childIndex));
                     },
                     onComplete: () => {
+                        console.log(`On complete called from child: ${childIndex}`)
                         if (playedCount === childIndex) {
                             if (playedCount < children.length - 1) {
-                                setPlayedCount(_ => childIndex + 1);
+                                setPlayedCount(childIndex + 1);
                             } else {
                                 onComplete?.();
                             }

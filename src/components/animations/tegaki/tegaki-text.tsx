@@ -14,15 +14,20 @@ interface TegakiTextProps extends TimedAnimation, ForwardingComponent {
     children: string;
 }
 
-export default function TegakiText({ children, className, style, index, groupIndex, onComplete }: TegakiTextProps) {
+export default function TegakiText({ children, id, className, style, index, groupIndex, onComplete }: TegakiTextProps) {
     const context = useContext(TegakiContext);
     const ref = useRef<TegakiRendererHandle>(null);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Just for logging
     useEffect(() => {
+        console.log(`${id}: index ${index}; groupIndex ${groupIndex}`);
         if (index && groupIndex) {
             if (groupIndex < index) {
                 ref.current?.engine?.seek(0);
                 ref.current?.engine?.pause();
+            } else if (groupIndex === index) {
+                ref.current?.engine?.seek(0);
+                ref.current?.engine?.play();
             } else {
                 ref.current?.engine?.play();
             }
@@ -38,7 +43,7 @@ export default function TegakiText({ children, className, style, index, groupInd
             time={context.time}
             effects={context.effects}
             className={className}
-            style={style}
+            style={{ ...style, opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? 1 : 0 }}
             onComplete={onComplete}
         >
             {children}

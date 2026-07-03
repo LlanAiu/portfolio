@@ -20,6 +20,7 @@ interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
 export default function RewritingTegakiText({
     children: current,
     orient,
+    id,
     index,
     groupIndex,
     onReset,
@@ -38,8 +39,8 @@ export default function RewritingTegakiText({
     const [playFirst, setPlayFirst] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
-
     useEffect(() => {
+        console.log(`${id}: index ${index}; groupIndex ${groupIndex}`);
         const currentEngine = playFirst ? ref1.current?.engine : ref2.current?.engine;
         if (index && groupIndex) {
             if (groupIndex < index) {
@@ -47,13 +48,16 @@ export default function RewritingTegakiText({
                 ref1.current?.engine?.pause();
                 ref2.current?.engine?.seek(0);
                 ref2.current?.engine?.pause();
+            } else if (groupIndex === index) {
+                currentEngine?.seek(0);
+                currentEngine?.play();
             } else {
                 currentEngine?.play();
             }
         } else {
             currentEngine?.play();
         }
-    }, [index, groupIndex])
+    }, [ref1, ref2, index, groupIndex])
 
     useEffect(() => {
         if (isLoaded) {
@@ -120,7 +124,7 @@ export default function RewritingTegakiText({
                     width: "max-content",
                     position: "absolute",
                     zIndex: playFirst ? 2 : 1,
-                    opacity: playFirst ? 1 : 0,
+                    opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? (playFirst ? 1 : 0) : 0,
                     transition: playFirst ? 'opacity 0.3s' : 'opacity 0.3s ease-in-out',
                     pointerEvents: playFirst ? 'auto' : 'none'
                 }}
@@ -139,7 +143,7 @@ export default function RewritingTegakiText({
                     width: "max-content",
                     position: "absolute",
                     zIndex: playFirst ? 1 : 2,
-                    opacity: playFirst ? 0 : 1,
+                    opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? (playFirst ? 0 : 1) : 0,
                     transition: playFirst ? 'opacity 0.3s ease-in-out' : 'opacity 0.3s',
                     pointerEvents: playFirst ? 'none' : 'auto'
                 }}
