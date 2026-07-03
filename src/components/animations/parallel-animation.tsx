@@ -12,12 +12,25 @@ interface ParallelAnimationProps extends TimedAnimation, TegakiContextProvider {
     children: ReactElement<TimedAnimation>[];
 }
 
-export default function ParallelAnimation({ children, onComplete, context }: ParallelAnimationProps) {
-    const [finished, setFinished] = useState(0);
+export default function ParallelAnimation({ children, index, groupIndex, onReset, onComplete, context }: ParallelAnimationProps) {
+    const [finished, setFinished] = useState<boolean[]>(new Array(children.length).fill(false));
+    const [shouldPlay, setShouldPlay] = useState(false);
+
+    useEffect(() => {
+        if (index && groupIndex) {
+            if (groupIndex < index) {
+                setShouldPlay(false);
+            } else {
+                setShouldPlay(true);
+            }
+        } else {
+            setShouldPlay(true);
+        }
+    }, [index, groupIndex])
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: Not correct
     useEffect(() => {
-        if (finished === children.length) {
+        if (finished.every(val => val)) {
             onComplete?.();
         }
     }, [finished])
@@ -28,13 +41,27 @@ export default function ParallelAnimation({ children, onComplete, context }: Par
     return (
         <TegakiContext value={merged ?? {}}>
             {
-                children.map((child) => {
+                children.map((child, index) => {
                     const parallelProps: Partial<TimedAnimation> = {
                         key: child.props.id,
-                        onComplete: () => {
-                            if (finished < children.length) {
-                                setFinished(prev => prev + 1);
+                        index: 1,
+                        groupIndex: shouldPlay ? 1 : 0,
+                        onReset: () => {
+                            if (finished.every(val => val)) {
+                                onReset?.();
                             }
+                            setFinished((prev) => {
+                                const copy = [...prev]
+                                copy[index] = false;
+                                return copy;
+                            });
+                        },
+                        onComplete: () => {
+                            setFinished((prev) => {
+                                const copy = [...prev]
+                                copy[index] = true;
+                                return copy;
+                            });
                         }
                     }
 

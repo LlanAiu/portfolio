@@ -1,4 +1,5 @@
 // builtin
+/** biome-ignore-all lint/correctness/useExhaustiveDependencies: Plain incorrect in the two cases */
 
 // external
 import { useContext, useEffect, useRef, useState } from "react";
@@ -16,7 +17,16 @@ interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
     orient: "orient-center" | "orient-center-left" | "orient-top-left";
 }
 
-export default function RewritingTegakiText({ children: current, orient, onComplete, style, className }: RewritingTegakiTextProps) {
+export default function RewritingTegakiText({
+    children: current,
+    orient,
+    index,
+    groupIndex,
+    onReset,
+    onComplete,
+    style,
+    className
+}: RewritingTegakiTextProps) {
     const context = useContext(TegakiContext);
     const ref1 = useRef<TegakiRendererHandle>(null);
     const ref2 = useRef<TegakiRendererHandle>(null);
@@ -28,18 +38,26 @@ export default function RewritingTegakiText({ children: current, orient, onCompl
     const [playFirst, setPlayFirst] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
-    const [hasCompleted, setHasCompleted] = useState(false);
 
-    function fireCompleteEvent() {
-        if (!hasCompleted) {
-            setHasCompleted(true);
-            onComplete?.();
+    useEffect(() => {
+        const currentEngine = playFirst ? ref1.current?.engine : ref2.current?.engine;
+        if (index && groupIndex) {
+            if (groupIndex < index) {
+                ref1.current?.engine?.seek(0);
+                ref1.current?.engine?.pause();
+                ref2.current?.engine?.seek(0);
+                ref2.current?.engine?.pause();
+            } else {
+                currentEngine?.play();
+            }
+        } else {
+            currentEngine?.play();
         }
-    }
+    }, [index, groupIndex])
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: plain incorrect
     useEffect(() => {
         if (isLoaded) {
+            onReset?.();
             computeNewTimeline();
         } else {
             setIsLoaded(_ => true);
@@ -96,7 +114,7 @@ export default function RewritingTegakiText({ children: current, orient, onCompl
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
-                onComplete={fireCompleteEvent}
+                onComplete={onComplete}
                 className={orient}
                 style={{
                     width: "max-content",
@@ -115,7 +133,7 @@ export default function RewritingTegakiText({ children: current, orient, onCompl
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
-                onComplete={fireCompleteEvent}
+                onComplete={onComplete}
                 className={orient}
                 style={{
                     width: "max-content",

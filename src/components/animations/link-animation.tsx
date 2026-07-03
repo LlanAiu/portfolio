@@ -15,12 +15,15 @@ interface LinkAnimationProps extends TimedAnimation, ForwardingComponent {
     ref?: Ref<HTMLAnchorElement>;
 }
 
-export default function LinkAnimation({ children, href, ref, onComplete, style, className }: LinkAnimationProps) {
+export default function LinkAnimation({ children, href, ref, index, groupIndex, onReset, onComplete, style, className }: LinkAnimationProps) {
 
     return (
         <Link href={href} ref={ref} className={className} style={style}>
             {
                 cloneElement(children, {
+                    index,
+                    groupIndex,
+                    onReset,
                     onComplete
                 })
             }
