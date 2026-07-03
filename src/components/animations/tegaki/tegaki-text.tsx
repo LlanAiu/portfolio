@@ -21,7 +21,7 @@ export default function TegakiText({ children, id, className, style, index, grou
     // biome-ignore lint/correctness/useExhaustiveDependencies: Just for logging
     useEffect(() => {
         console.log(`${id}: index ${index}; groupIndex ${groupIndex}`);
-        if (index && groupIndex) {
+        if (index !== undefined && groupIndex !== undefined) {
             if (groupIndex < index) {
                 ref.current?.engine?.seek(0);
                 ref.current?.engine?.pause();

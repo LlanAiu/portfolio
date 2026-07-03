@@ -42,7 +42,7 @@ export default function RewritingTegakiText({
     useEffect(() => {
         console.log(`${id}: index ${index}; groupIndex ${groupIndex}`);
         const currentEngine = playFirst ? ref1.current?.engine : ref2.current?.engine;
-        if (index && groupIndex) {
+        if (index !== undefined && groupIndex !== undefined) {
             if (groupIndex < index) {
                 ref1.current?.engine?.seek(0);
                 ref1.current?.engine?.pause();

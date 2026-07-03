@@ -19,15 +19,15 @@ export default function TestPage() {
 
     return (
         <div>
-            <SequentialAnimation id='first' context={{ time: { mode: 'uncontrolled', speed: 2.4 } }}>
-                <TegakiText id="first-text">Hello</TegakiText>
+            <SequentialAnimation id='outer' context={{ time: { mode: 'uncontrolled', speed: 2.4 } }}>
+                <TegakiText id="standalone-text">Hello</TegakiText>
                 <ParallelAnimation id='parellel'>
-                    <RewritingTegakiText id="rewrite-one" orient="orient-top-left">{display}</RewritingTegakiText>
-                    <TegakiText id="second-text">Nothing much</TegakiText>
+                    <RewritingTegakiText id="parellel-rewrite" orient="orient-top-left">{display}</RewritingTegakiText>
+                    <TegakiText id="parallel-text">Nothing much</TegakiText>
                 </ParallelAnimation>
-                <SequentialAnimation id="sequence-two">
-                    <RewritingTegakiText id="rewrite-two" orient="orient-top-left">{display}</RewritingTegakiText>
-                    <TegakiText id="third-text">Oops again?</TegakiText>
+                <SequentialAnimation id="sequence">
+                    <RewritingTegakiText id="sequence-rewrite" orient="orient-top-left">{display}</RewritingTegakiText>
+                    <TegakiText id="sequence-text">Oops again?</TegakiText>
                 </SequentialAnimation>
             </SequentialAnimation>
 

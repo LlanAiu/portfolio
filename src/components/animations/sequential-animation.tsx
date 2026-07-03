@@ -1,7 +1,7 @@
 // builtin
 
 // external
-import { cloneElement, type ReactElement, useEffect, useState } from "react";
+import { cloneElement, type ReactElement, useContext, useEffect, useState } from "react";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
@@ -12,20 +12,23 @@ interface SequentialAnimationProps extends TimedAnimation, TegakiContextProvider
     children: ReactElement<TimedAnimation>[];
 }
 
-export default function SequentialAnimation({ children, index, groupIndex, onReset, onComplete, context }: SequentialAnimationProps) {
+export default function SequentialAnimation({ children, id, index, groupIndex, onReset, onComplete, context }: SequentialAnimationProps) {
     const [playedCount, setPlayedCount] = useState(-1);
+    const above: TegakiSettings = useContext(TegakiContext);
+    const merged: TegakiSettings = mergeWithDefault(context ?? above);
 
-    const merged: TegakiSettings = mergeWithDefault(context);
-
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Just for logging
     useEffect(() => {
-        if (index && groupIndex) {
+        console.log(`ID ${id}: index - ${index}; groupIndex - ${groupIndex}; playedCount: ${playedCount}`)
+        if (index !== undefined && groupIndex !== undefined) {
             if (groupIndex < index) {
                 setPlayedCount(-1);
-            } else {
+            } else if (groupIndex === index) {
                 setPlayedCount(0);
+            } else {
+                setPlayedCount(prev => Math.max(prev, 0));
             }
         } else {
-            console.log("Starting sequential group")
             setPlayedCount(0);
         }
     }, [index, groupIndex])

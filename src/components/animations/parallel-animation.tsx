@@ -1,7 +1,7 @@
 // builtin
 
 // external
-import { cloneElement, type ReactElement, useEffect, useState } from "react";
+import { cloneElement, type ReactElement, useContext, useEffect, useState } from "react";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
@@ -12,19 +12,26 @@ interface ParallelAnimationProps extends TimedAnimation, TegakiContextProvider {
     children: ReactElement<TimedAnimation>[];
 }
 
-export default function ParallelAnimation({ children, index, groupIndex, onReset, onComplete, context }: ParallelAnimationProps) {
+export default function ParallelAnimation({ children, id, index, groupIndex, onReset, onComplete, context }: ParallelAnimationProps) {
     const [finished, setFinished] = useState<boolean[]>(new Array(children.length).fill(false));
-    const [shouldPlay, setShouldPlay] = useState(false);
+    const [shouldPlay, setShouldPlay] = useState(-1);
 
+    const above: TegakiSettings = useContext(TegakiContext);
+    const merged: TegakiSettings = mergeWithDefault(context ?? above);
+
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Just for logging
     useEffect(() => {
-        if (index && groupIndex) {
+        console.log(`ID ${id}: index - ${index}; groupIndex - ${groupIndex}; shouldPlay: ${shouldPlay}`)
+        if (index !== undefined && groupIndex !== undefined) {
             if (groupIndex < index) {
-                setShouldPlay(false);
+                setShouldPlay(-1);
             } else {
-                setShouldPlay(true);
+                console.log(`Playing parelle because ${groupIndex} >= ${index}`)
+                setShouldPlay(1);
             }
         } else {
-            setShouldPlay(true);
+            console.log("playing parallel due to non-existance");
+            setShouldPlay(1);
         }
     }, [index, groupIndex])
 
@@ -36,8 +43,6 @@ export default function ParallelAnimation({ children, index, groupIndex, onReset
     }, [finished])
 
 
-    const merged: TegakiSettings = mergeWithDefault(context);
-
     return (
         <TegakiContext value={merged ?? {}}>
             {
@@ -45,7 +50,7 @@ export default function ParallelAnimation({ children, index, groupIndex, onReset
                     const parallelProps: Partial<TimedAnimation> = {
                         key: child.props.id,
                         index: 1,
-                        groupIndex: shouldPlay ? 1 : 0,
+                        groupIndex: shouldPlay,
                         onReset: () => {
                             if (finished.every(val => val)) {
                                 onReset?.();
