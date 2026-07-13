@@ -16,7 +16,9 @@ export const TextInitialX = {
         opacity: 0,
         x: -50,
         transition: {
-            when: "afterChildren"
+            when: "afterChildren",
+            duration: 1.0,
+            staggerChildren: 0.6
         }
     }
 }
@@ -35,7 +37,9 @@ export const TextInitialY = {
         opacity: 0,
         y: -50,
         transition: {
-            when: "afterChildren"
+            when: "afterChildren",
+            duration: 1.0,
+            staggerChildren: 0.6
         }
     }
 }

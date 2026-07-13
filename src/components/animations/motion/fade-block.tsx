@@ -5,26 +5,31 @@ import { motion } from "motion/react";
 import { type ReactNode, useEffect, useState } from "react";
 
 // internal
-import { TextInitialX } from "@/lib/animation/animation-utils";
+import { TextInitialX, TextInitialY } from "@/lib/animation/animation-utils";
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
 
 
-interface DropFadeBlockProps extends TimedAnimation {
+interface FadeBlockAnimationProps extends TimedAnimation {
     children: ReactNode;
+    orientation: 'vertical' | 'horizontal';
 }
 
-export default function DropFadeBlock({ children, index, groupIndex, onComplete }: DropFadeBlockProps) {
+export default function FadeBlockAnimation({ children, orientation, index, groupIndex, onComplete }: FadeBlockAnimationProps) {
     const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         if (index !== undefined && groupIndex !== undefined) {
             if (groupIndex >= index) {
                 setIsPlaying(true);
+            } else {
+                setIsPlaying(false);
             }
+        } else {
+            setIsPlaying(false);
         }
     })
 
-    const text = TextInitialX;
+    const text = (orientation === 'horizontal') ? TextInitialX : TextInitialY;
 
     return (
         <motion.div
@@ -33,7 +38,11 @@ export default function DropFadeBlock({ children, index, groupIndex, onComplete 
             initial="hidden"
             variants={text}
             style={{ opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? 1 : 0 }}
-            onAnimationComplete={onComplete}
+            onAnimationComplete={() => {
+                if (isPlaying) {
+                    onComplete?.()
+                }
+            }}
         >
             {children}
         </motion.div>

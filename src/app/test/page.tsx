@@ -9,6 +9,7 @@ import ParallelAnimation from "@/components/animations/parallel-animation";
 import SequentialAnimation from "@/components/animations/sequential-animation";
 import RewritingTegakiText from "@/components/animations/tegaki/rewriting-tegaki-text";
 import TegakiText from "@/components/animations/tegaki/tegaki-text";
+import FadeBlockAnimation from "@/components/animations/motion/fade-block";
 
 
 export default function TestPage() {
@@ -29,6 +30,11 @@ export default function TestPage() {
                     <RewritingTegakiText id="sequence-rewrite" orient="orient-top-left">{display}</RewritingTegakiText>
                     <TegakiText id="sequence-text">Oops again?</TegakiText>
                 </SequentialAnimation>
+                <FadeBlockAnimation id="fade-block" orientation="vertical">
+                    <div>
+                        Hello there
+                    </div>
+                </FadeBlockAnimation>
             </SequentialAnimation>
 
             <button type="button" onClick={() => setFlip(prev => !prev)}>Toggle</button>

@@ -26,7 +26,7 @@ export default function ParallelAnimation({ children, id, index, groupIndex, onR
             if (groupIndex < index) {
                 setShouldPlay(-1);
             } else {
-                console.log(`Playing parelle because ${groupIndex} >= ${index}`)
+                console.log(`Playing parellel because ${groupIndex} >= ${index}`)
                 setShouldPlay(1);
             }
         } else {
