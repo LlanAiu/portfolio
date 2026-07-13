@@ -7,9 +7,10 @@ import { type ReactNode, useEffect, useState } from "react";
 // internal
 import { TextInitialX, TextInitialY } from "@/lib/animation/animation-utils";
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
+import type { ForwardingComponent } from "@/lib/util/forwarding-component";
 
 
-interface FadeBlockAnimationProps extends TimedAnimation {
+interface FadeBlockAnimationProps extends TimedAnimation, ForwardingComponent {
     children: ReactNode;
     orientation: 'vertical' | 'horizontal';
 }

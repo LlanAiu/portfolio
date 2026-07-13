@@ -4,22 +4,19 @@
 // external
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'motion/react';
 
 // internal
-import { TextChangeDelay, TextInitialX } from '@/lib/animation/animation-utils';
+import { TextChangeDelay } from '@/lib/animation/animation-utils';
 import SequentialAnimation from '@/components/animations/sequential-animation';
 import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
+import FadeBlockAnimation from '@/components/animations/motion/fade-block';
+import ParallelAnimation from '@/components/animations/parallel-animation';
 
 export default function ProjectsPage() {
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
         function swap() {
-            setTimeout(() => {
-            }, TextChangeDelay * 500);
-            setTimeout(() => {
-            }, TextChangeDelay * 1000);
             setTimeout(() => {
                 setIndex((index + 1) % projects.length);
             }, TextChangeDelay * 1500);
@@ -72,8 +69,6 @@ export default function ProjectsPage() {
         },
     ];
 
-    const text = TextInitialX;
-
     return (
         <div className='w-full h-full'>
             <div
@@ -89,24 +84,26 @@ export default function ProjectsPage() {
                     >
                         {projects[index].title}
                     </RewritingTegakiText>
-                    <RewritingTegakiText
-                        id='description'
-                        orient='orient-top-left'
-                        className='sm:text-2xl md:text-3xl lg:text-4xl'
-                    >
-                        {projects[index].description}
-                    </RewritingTegakiText>
-                </SequentialAnimation>
 
-                <motion.div
-                    className='w-max h-max rounded-md px-3 py-2.5'
-                    animate={{ backgroundColor: '#143732' }}
-                    variants={text}
-                >
-                    <Link href={projects[index].link}>
-                        <span className='sm:text-xl md:text-2xl'>Project Link</span>
-                    </Link>
-                </motion.div>
+                    <ParallelAnimation id='details'>
+                        <RewritingTegakiText
+                            id='description'
+                            orient='orient-top-left'
+                            className='sm:text-2xl md:text-3xl lg:text-4xl'
+                        >
+                            {projects[index].description}
+                        </RewritingTegakiText>
+                        <FadeBlockAnimation
+                            id='project-link'
+                            orientation='horizontal'
+                            className='w-max h-max rounded-md px-3 py-2.5'
+                        >
+                            <Link href={projects[index].link}>
+                                <span className='sm:text-xl md:text-2xl'>Project Link</span>
+                            </Link>
+                        </FadeBlockAnimation>
+                    </ParallelAnimation>
+                </SequentialAnimation>
             </div>
         </div>
     );
