@@ -85,7 +85,9 @@ export default function ProjectsPage() {
                         {projects[index].title}
                     </RewritingTegakiText>
 
-                    <ParallelAnimation id='details'>
+                    <ParallelAnimation id='details' context={{
+                        time: { mode: 'uncontrolled', delay: 0.4, speed: 4.5 }
+                    }}>
                         <RewritingTegakiText
                             id='description'
                             orient='orient-top-left'
@@ -96,11 +98,13 @@ export default function ProjectsPage() {
                         <FadeBlockAnimation
                             id='project-link'
                             orientation='horizontal'
-                            className='w-max h-max rounded-md px-3 py-2.5'
+                            className='w-max h-max'
                         >
-                            <Link href={projects[index].link}>
-                                <span className='sm:text-xl md:text-2xl'>Project Link</span>
-                            </Link>
+                            <div className='rounded-md px-3 py-2.5 bg-blue-100'>
+                                <Link href={projects[index].link}>
+                                    <span className='sm:text-xl md:text-2xl'>Project Link</span>
+                                </Link>
+                            </div>
                         </FadeBlockAnimation>
                     </ParallelAnimation>
                 </SequentialAnimation>

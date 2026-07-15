@@ -15,7 +15,7 @@ interface FadeBlockAnimationProps extends TimedAnimation, ForwardingComponent {
     orientation: 'vertical' | 'horizontal';
 }
 
-export default function FadeBlockAnimation({ children, orientation, index, groupIndex, onComplete }: FadeBlockAnimationProps) {
+export default function FadeBlockAnimation({ children, orientation, index, groupIndex, onComplete, className, style }: FadeBlockAnimationProps) {
     const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
@@ -34,11 +34,11 @@ export default function FadeBlockAnimation({ children, orientation, index, group
 
     return (
         <motion.div
-            className='w-max h-max rounded-md px-3 py-2.5'
+            className={className}
             animate={(isPlaying) ? "visible" : "hidden"}
             initial="hidden"
             variants={text}
-            style={{ opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? 1 : 0 }}
+            style={{ ...style, opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? 1 : 0 }}
             onAnimationComplete={() => {
                 if (isPlaying) {
                     onComplete?.()
