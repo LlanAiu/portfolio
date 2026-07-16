@@ -10,6 +10,7 @@ import type { NavigationSection } from "@/lib/layout/navigation-sections";
 import { buildBaseTransformSet, reviseTransformSetForHover, type SheetTransform } from "@/lib/layout/sheet-transform";
 import SheetPanel from "./sheet-panel";
 import { usePathname } from "next/navigation";
+import { useIsTouchDevice } from "@/hooks/useIsMobile";
 
 
 interface SheetNavigationProps {
@@ -20,6 +21,7 @@ interface SheetNavigationProps {
 
 export default function SheetNavigation({ sections, children }: SheetNavigationProps) {
     const activeEndpoint = usePathname();
+    const isTouchDevice = useIsTouchDevice();
     const [isActive, setIsActive] = useState(false);
     const baseTransforms = useMemo<SheetTransform[]>(() => buildBaseTransformSet(sections.length), [sections.length]);
     const [transforms, setTransform] = useState<SheetTransform[]>(baseTransforms);

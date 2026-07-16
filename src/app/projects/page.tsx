@@ -100,7 +100,7 @@ export default function ProjectsPage() {
                             orientation='horizontal'
                             className='w-max h-max'
                         >
-                            <div className='rounded-md px-3 py-2.5 bg-blue-100'>
+                            <div className='rounded-md px-3 py-2.5 bg-blue-100 hover:bg-blue-300'>
                                 <Link href={projects[index].link}>
                                     <span className='sm:text-xl md:text-2xl'>Project Link</span>
                                 </Link>
