@@ -25,14 +25,14 @@ export function sheetTransformToCSS(transform: SheetTransform, active: boolean):
     }
 }
 
-export function buildBaseTransformSet(pages: number): SheetTransform[] {
+export function buildBaseTransformSet(pages: number, isStatic: boolean): SheetTransform[] {
     const transforms: SheetTransform[] = [];
 
     for (let i = 0; i < pages; i++) {
         transforms.push({
             rotate_degs: 1.3 * i,
             translate_up: 5 + 2.4 * i * (- 1) ** i,
-            translate_left: 20 * i
+            translate_left: isStatic ? 35 * i : 20 * i
         });
     }
 

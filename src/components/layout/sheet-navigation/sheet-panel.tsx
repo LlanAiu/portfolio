@@ -26,7 +26,7 @@ export default function SheetPanel({ index, section, sheetTransform, onHover, cl
     if (isMain) {
         return (
             <div
-                className="section-title p-10 absolute w-full h-full text-left top-0 bg-gray-100 border-2"
+                className="section-title p-4 md:p-10 absolute w-full h-full text-left top-0 bg-gray-100 border-2"
                 onMouseEnter={onHover}
                 onClick={closePanel}
                 style={{ ...sheetTransformToCSS(sheetTransform, transformActive), zIndex: index }}
@@ -40,12 +40,12 @@ export default function SheetPanel({ index, section, sheetTransform, onHover, cl
 
     return (
         <Link
-            className="section-title p-3 absolute w-full h-full text-left top-0 z-30 bg-gray-100 border-2"
+            className="section-title p-1 md:p-3 absolute w-full h-full text-left top-0 z-30 bg-gray-100 border-2"
             onMouseEnter={onHover}
             href={section.endpoint}
             style={{ ...sheetTransformToCSS(sheetTransform, transformActive), zIndex: index }}
         >
-            <h3 className="text-3xl">{section.name}</h3>
+            <h3 className="text-2xl md:text-3xl">{section.name}</h3>
         </Link>
     )
 }

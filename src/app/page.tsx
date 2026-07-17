@@ -9,14 +9,21 @@ import SequentialAnimation from '@/components/animations/sequential-animation';
 import TegakiText from '@/components/animations/tegaki/tegaki-text';
 import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
 import LinkAnimation from '@/components/animations/link-animation';
+import { useIsTouchDevice } from '@/hooks/useIsTouchDevice';
 
 
 export default function Home() {
     const [display, setDisplay] = useState(3);
-    const [initialText, setInitialText] = useState('Press [Space]');
+    const isTouchDevice = useIsTouchDevice();
     const linkRef = useRef<HTMLAnchorElement>(null);
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: Only used for keyboard/touchscreen controls
+    const links = [
+        { text: 'take a look at some projects?', link: './projects' },
+        { text: 'introduce ourselves? (or just me)', link: './about' },
+        { text: 'catch up on how life\'s going?', link: './current' },
+        { text: isTouchDevice ? "Tap on screen" : "Press [space]", link: './' }
+    ];
+
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.code === 'Space' && !(linkRef.current?.contains(event.target as Node))) {
@@ -30,10 +37,6 @@ export default function Home() {
             }
         };
 
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-            setInitialText('Tap on screen');
-        }
-
         window.addEventListener('touchstart', handleTouchStart);
         window.addEventListener('keydown', handleKeyDown);
 
@@ -41,14 +44,8 @@ export default function Home() {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('touchstart', handleTouchStart);
         };
-    }, [display]);
+    }, [links.length]);
 
-    const links = [
-        { text: 'take a look at some projects?', link: './projects' },
-        { text: 'introduce ourselves? (or just me)', link: './about' },
-        { text: 'catch up on how life\'s going?', link: './current' },
-        { text: initialText, link: './' }
-    ];
 
     return (
         <div className='pt-16 text-center space-y-10 md:space-y-16'>

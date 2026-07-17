@@ -10,7 +10,7 @@ import type { NavigationSection } from "@/lib/layout/navigation-sections";
 import { buildBaseTransformSet, reviseTransformSetForHover, type SheetTransform } from "@/lib/layout/sheet-transform";
 import SheetPanel from "./sheet-panel";
 import { usePathname } from "next/navigation";
-import { useIsTouchDevice } from "@/hooks/useIsMobile";
+import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 
 
 interface SheetNavigationProps {
@@ -23,7 +23,7 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
     const activeEndpoint = usePathname();
     const isTouchDevice = useIsTouchDevice();
     const [isActive, setIsActive] = useState(false);
-    const baseTransforms = useMemo<SheetTransform[]>(() => buildBaseTransformSet(sections.length), [sections.length]);
+    const baseTransforms = useMemo<SheetTransform[]>(() => buildBaseTransformSet(sections.length, isTouchDevice), [sections.length, isTouchDevice]);
     const [transforms, setTransform] = useState<SheetTransform[]>(baseTransforms);
     const displaySections = useMemo<NavigationSection[]>(() => {
         const sectionCopy = [
@@ -42,7 +42,9 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
     }, [activeEndpoint]);
 
     function setFocusedSection(index: number) {
-        setTransform(_ => reviseTransformSetForHover(baseTransforms, index));
+        if (!isTouchDevice) {
+            setTransform(_ => reviseTransformSetForHover(baseTransforms, index));
+        }
     }
 
     return (

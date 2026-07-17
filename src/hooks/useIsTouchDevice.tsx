@@ -8,26 +8,22 @@ import { useEffect, useState } from "react";
 export function useIsTouchDevice(): boolean {
     const query = "(hover: none)";
 
-    const [isTouch, setIsTouch] = useState<boolean>(() => {
-        if (typeof window === "undefined") return false;
-        console.log("isTouch: ", window.matchMedia(query).matches);
-        return window.matchMedia(query).matches;
-    });
+    const [isMounted, setIsMounted] = useState(false);
+    const [isTouch, setIsTouch] = useState(false);
 
     useEffect(() => {
+        setIsMounted(true);
+
         const mediaQueryList = window.matchMedia(query);
+        setIsTouch(mediaQueryList.matches);
 
         const handleChange = (event: MediaQueryListEvent) => {
-            console.log("isTouch: ", event.matches);
             setIsTouch(event.matches);
         };
 
         mediaQueryList.addEventListener("change", handleChange);
-
-        return () => {
-            mediaQueryList.removeEventListener("change", handleChange);
-        };
+        return () => mediaQueryList.removeEventListener("change", handleChange);
     }, []);
 
-    return isTouch;
+    return isMounted ? isTouch : false;
 }
