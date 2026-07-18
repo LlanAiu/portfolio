@@ -52,7 +52,13 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
             <button
                 type="button"
                 className="absolute bottom-1 right-1 z-40 bg-blue-300 p-2 rounded-md"
-                onClick={() => setIsActive(prev => !prev)}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setIsActive(prev => !prev);
+                }}
+                onTouchStart={(e) => {
+                    e.stopPropagation();
+                }}
             >
                 Toggle
             </button>
