@@ -16,12 +16,14 @@ interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
     children: string;
     orient: "orient-center" | "orient-center-left" | "orient-top-left";
     height?: number;
+    fullRewrite?: boolean;
 }
 
 export default function RewritingTegakiText({
     children: current,
     orient,
     height,
+    fullRewrite,
     id,
     index,
     groupIndex,
@@ -86,11 +88,14 @@ export default function RewritingTegakiText({
         const newTimeline = targetEngine.computeTimeline(current).entries;
 
         let index = 0;
-        while (index < currentTimeline.length && index < newTimeline.length) {
-            if (currentTimeline[index].char !== newTimeline[index].char) {
-                break;
-            } else {
-                index += 1;
+
+        if (!fullRewrite) {
+            while (index < currentTimeline.length && index < newTimeline.length) {
+                if (currentTimeline[index].char !== newTimeline[index].char) {
+                    break;
+                } else {
+                    index += 1;
+                }
             }
         }
 
