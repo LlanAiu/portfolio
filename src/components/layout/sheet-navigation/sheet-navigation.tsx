@@ -11,6 +11,7 @@ import { buildBaseTransformSet, reviseTransformSetForHover, type SheetTransform 
 import SheetPanel from "./sheet-panel";
 import { usePathname } from "next/navigation";
 import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
+import RewritingTegakiText from "@/components/animations/tegaki/rewriting-tegaki-text";
 
 
 interface SheetNavigationProps {
@@ -51,7 +52,7 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
         <div className="relative h-full">
             <button
                 type="button"
-                className="absolute bottom-1 right-1 z-40 bg-blue-300 p-2 rounded-md"
+                className="absolute bottom-1 right-1 z-40 bg-blue-950 hover:bg-blue-800 p-2 rounded-full w-12"
                 onClick={(e) => {
                     e.stopPropagation();
                     setIsActive(prev => !prev);
@@ -60,7 +61,9 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
                     e.stopPropagation();
                 }}
             >
-                Toggle
+                <RewritingTegakiText id="button-text" orient="orient-center" height={32} className="text-white">
+                    {isActive ? "X" : "O"}
+                </RewritingTegakiText>
             </button>
 
             <div onMouseLeave={() => setTransform(_ => baseTransforms)}>

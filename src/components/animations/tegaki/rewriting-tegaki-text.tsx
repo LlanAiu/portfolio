@@ -15,11 +15,13 @@ import { TegakiContext } from "@/lib/animation/tegaki-context";
 interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
     children: string;
     orient: "orient-center" | "orient-center-left" | "orient-top-left";
+    height?: number;
 }
 
 export default function RewritingTegakiText({
     children: current,
     orient,
+    height,
     id,
     index,
     groupIndex,
@@ -112,7 +114,7 @@ export default function RewritingTegakiText({
     }
 
     return (
-        <div className={className} style={{ ...style, position: 'relative', height: 80 }}>
+        <div className={className} style={{ ...style, position: 'relative', height: height ? height : 80 }}>
             <TegakiRenderer
                 ref={ref1}
                 font={context.font}
