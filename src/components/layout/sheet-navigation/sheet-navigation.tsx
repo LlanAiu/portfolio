@@ -24,8 +24,13 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
     const activeEndpoint = usePathname();
     const isTouchDevice = useIsTouchDevice();
     const [isActive, setIsActive] = useState(false);
-    const baseTransforms = useMemo<SheetTransform[]>(() => buildBaseTransformSet(sections.length, isTouchDevice), [sections.length, isTouchDevice]);
-    const [transforms, setTransform] = useState<SheetTransform[]>(baseTransforms);
+    const [transforms, setTransform] = useState<SheetTransform[]>([]);
+    const baseTransforms = useMemo<SheetTransform[]>(
+        () => {
+            const newTransforms = buildBaseTransformSet(sections.length, isTouchDevice);
+            setTransform(newTransforms);
+            return newTransforms;
+        }, [sections.length, isTouchDevice]);
     const displaySections = useMemo<NavigationSection[]>(() => {
         const sectionCopy = [
             ...sections.filter(section => section.endpoint !== activeEndpoint)
@@ -35,7 +40,7 @@ export default function SheetNavigation({ sections, children }: SheetNavigationP
             sectionCopy.push(activeSection);
         }
         return sectionCopy;
-    }, [sections, activeEndpoint])
+    }, [sections, activeEndpoint]);
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: close on endpoint change
     useEffect(() => {
