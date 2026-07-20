@@ -72,7 +72,7 @@ export default function ProjectsPage() {
     return (
         <div className='w-full h-full'>
             <div
-                className='sm:pt-6 sm:pl-6 md:space-y-12 md:pt-12 md:pl-12 lg:space-y-20 lg:pt-24 lg:px-6'
+                className='space-y-6 md:space-y-12 md:pt-12 md:pl-12 lg:space-y-20 lg:pt-24 lg:px-6'
             >
                 <SequentialAnimation id='projects' context={{
                     time: { mode: 'uncontrolled', delay: 0.4, speed: 2.5 }
@@ -80,7 +80,8 @@ export default function ProjectsPage() {
                     <RewritingTegakiText
                         id='title'
                         orient='orient-top-left'
-                        className='sm:text-3xl md:text-4xl lg:text-5xl'
+                        height={50}
+                        className='text-3xl md:text-4xl lg:text-5xl'
                     >
                         {projects[index].title}
                     </RewritingTegakiText>
