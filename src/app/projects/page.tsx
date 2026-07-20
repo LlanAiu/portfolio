@@ -11,9 +11,12 @@ import SequentialAnimation from '@/components/animations/sequential-animation';
 import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
 import FadeBlockAnimation from '@/components/animations/motion/fade-block';
 import ParallelAnimation from '@/components/animations/parallel-animation';
+import { useOnScreenSize } from '@/hooks/useOnScreenSize';
 
 export default function ProjectsPage() {
     const [index, setIndex] = useState(0);
+    const titleHeight = useOnScreenSize(40, 40, 50, 50);
+    const textHeight = useOnScreenSize(160, 140, 100, 120);
 
     useEffect(() => {
         function swap() {
@@ -72,7 +75,7 @@ export default function ProjectsPage() {
     return (
         <div className='w-full h-full'>
             <div
-                className='space-y-6 md:space-y-12 md:pt-12 md:pl-12 lg:space-y-20 lg:pt-24 lg:px-6'
+                className='space-y-8 pt-6 md:space-y-12 md:pt-12 lg:space-y-20 lg:pt-24'
             >
                 <SequentialAnimation id='projects' context={{
                     time: { mode: 'uncontrolled', delay: 0.4, speed: 2.5 }
@@ -80,7 +83,7 @@ export default function ProjectsPage() {
                     <RewritingTegakiText
                         id='title'
                         orient='orient-top-left'
-                        height={50}
+                        height={titleHeight}
                         className='text-3xl md:text-4xl lg:text-5xl'
                     >
                         {projects[index].title}
@@ -92,7 +95,8 @@ export default function ProjectsPage() {
                         <RewritingTegakiText
                             id='description'
                             orient='orient-top-left'
-                            className='sm:text-2xl md:text-3xl lg:text-4xl'
+                            height={textHeight}
+                            className='text-2xl md:text-3xl lg:text-4xl'
                         >
                             {projects[index].description}
                         </RewritingTegakiText>

@@ -52,23 +52,23 @@ export default function CurrentPage() {
     ];
 
     return (
-        <div className='w-full h-full'>
+        <div className='w-full h-full content-center'>
             <div
-                className='sm:pt-12 sm:pl-8 sm:space-y-6 md:pt-24 md:pl-16 md:space-y-12 lg:pt-36 lg:px-18 lg:space-y-24'
+                className='space-y-16 md:pl-16 md:space-y-12 lg:px-18 lg:space-y-24'
             >
                 <SequentialAnimation id='currently' context={{
                     time: { mode: 'uncontrolled', delay: 0.4, speed: 2.5 }
                 }}>
                     <TegakiText
                         id='intro'
-                        className='sm:text-4xl md:text-6xl  lg:text-7xl'
+                        className='text-5xl md:text-6xl  lg:text-7xl'
                     >
                         As of recently,
                     </TegakiText>
                     <RewritingTegakiText
                         id='activity'
                         orient='orient-top-left'
-                        className='sm:text-3xl md:text-4xl lg:text-5xl'
+                        className='text-3xl md:text-4xl lg:text-5xl'
                     >
                         {current[index].text}
                     </RewritingTegakiText>
