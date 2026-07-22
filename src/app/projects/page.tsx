@@ -16,7 +16,7 @@ import { useOnScreenSize } from '@/hooks/useOnScreenSize';
 export default function ProjectsPage() {
     const [index, setIndex] = useState(0);
     const titleHeight = useOnScreenSize(40, 40, 50, 50);
-    const textHeight = useOnScreenSize(160, 140, 100, 120);
+    const textHeight = useOnScreenSize(105, 105, 100, 120);
 
     useEffect(() => {
         function swap() {
@@ -75,7 +75,7 @@ export default function ProjectsPage() {
     return (
         <div className='w-full h-full'>
             <div
-                className='space-y-8 pt-6 md:space-y-12 md:pt-12 lg:space-y-20 lg:pt-24'
+                className='space-y-12 pt-6 md:space-y-18 md:pt-12 lg:space-y-24 lg:pt-24'
             >
                 <SequentialAnimation id='projects' context={{
                     time: { mode: 'uncontrolled', delay: 0.4, speed: 2.5 }
