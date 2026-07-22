@@ -1,0 +1,16 @@
+.orient-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orient-center-left {
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+
+.orient-top-left {
+    top: 0;
+    left: 0;
+}

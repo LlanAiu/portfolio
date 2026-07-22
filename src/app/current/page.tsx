@@ -3,24 +3,22 @@
 
 // external
 import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
-import clsx from 'clsx';
 
 // internal
-import Navigation from '../components/nav-bar';
-import { TextChangeDelay, TextInitialY, TextSwapFade } from '../util/animUtil';
+import { TextChangeDelay } from '@/lib/animation/animation-utils';
+import SequentialAnimation from '@/components/animations/sequential-animation';
+import TegakiText from '@/components/animations/tegaki/tegaki-text';
+import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
+import TegakiWrapper from '@/components/animations/tegaki/tegaki-wrapper';
 
 export default function CurrentPage() {
     const [index, setIndex] = useState(0);
-    const [swap, setSwap] = useState(false);
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: length of current is effectively constant
     useEffect(() => {
         const swap = () => {
-            setSwap(prev => !prev);
             setTimeout(() => {
                 setIndex(prev => (prev + 1) % current.length);
-                setSwap(prev => !prev);
             }, TextChangeDelay * 1000);
         }
 
@@ -46,46 +44,41 @@ export default function CurrentPage() {
     }, [index]);
 
     const current = [
-        { text: 'excited for the year ahead in 2026!' },
-        { text: 'looking for a new book to read' },
-        { text: 'revisiting reinforcement learning again' },
-        { text: 'discovering just how nice Arcs and Mutexes are in Rust' },
-        { text: 'trying (and somehwat failing) to catch up on sleep' },
+        { text: 'I\'ve slowly picked up Scala. And it has grown on me.' },
+        { text: 'I\'ve been enjoying summer break! (I even travelled this time around)' },
+        { text: 'I\'ve been catching up on sleep, this time for real' },
+        { text: 'I\'ve gotten the chance to work with Terraform and AWS infra... which is fun-ish?' },
+        { text: 'I\'ve played a good bit of Mahjong w/ friends/family' },
+        { text: 'I\'ve been impressed by Pi\'s agent harness' },
     ];
 
-    const text = TextInitialY;
-    const textFade = TextSwapFade;
-
     return (
-        <div className='w-full h-full'>
-            <Navigation path='current' bg='#B5B0BF' text='white' bttn='#1B4076' hlght='#266DD3' />
-            <motion.div animate={{ backgroundColor: '#266DD3', color: 'white' }} className='w-full h-full'>
-                <motion.div
-                    className='sm:pt-12 sm:pl-8 sm:space-y-6 md:pt-24 md:pl-16 md:space-y-12 lg:pt-36 lg:px-18 lg:space-y-24'
-                    animate='visible'
-                    initial='hidden'
-                    variants={text}
-                >
-                    <motion.p
-                        className='sm:text-4xl md:text-6xl  lg:text-7xl'
-                        variants={text}
+        <div className='w-full h-full content-center'>
+            <div
+                className='space-y-16 md:pl-16 md:space-y-12 lg:px-18 lg:space-y-24'
+            >
+                <SequentialAnimation id='currently' context={{
+                    time: { mode: 'uncontrolled', delay: 0.4, speed: 2.5 }
+                }}>
+                    <TegakiText
+                        id='intro'
+                        className='text-5xl md:text-6xl  lg:text-7xl'
                     >
-                        <b>Currently, I am...</b>
-                    </motion.p>
-                    <motion.div variants={text}>
-                        <motion.p
-                            className='sm:text-3xl md:text-4xl lg:text-5xl'
-                            animate={clsx({
-                                'in': !swap,
-                                'out': swap
-                            })}
-                            variants={textFade}
+                        As of recently,
+                    </TegakiText>
+                    <TegakiWrapper id='context' context={{
+                        time: { mode: 'uncontrolled', delay: 0.4, speed: 3 }
+                    }}>
+                        <RewritingTegakiText
+                            id='activity'
+                            orient='orient-top-left'
+                            className='text-3xl md:text-4xl lg:text-5xl'
                         >
                             {current[index].text}
-                        </motion.p>
-                    </motion.div>
-                </motion.div>
-            </motion.div>
+                        </RewritingTegakiText>
+                    </TegakiWrapper>
+                </SequentialAnimation>
+            </div>
         </div>
     );
 }
