@@ -9,6 +9,7 @@ import { TextChangeDelay } from '@/lib/animation/animation-utils';
 import SequentialAnimation from '@/components/animations/sequential-animation';
 import TegakiText from '@/components/animations/tegaki/tegaki-text';
 import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
+import TegakiWrapper from '@/components/animations/tegaki/tegaki-wrapper';
 
 export default function CurrentPage() {
     const [index, setIndex] = useState(0);
@@ -65,13 +66,17 @@ export default function CurrentPage() {
                     >
                         As of recently,
                     </TegakiText>
-                    <RewritingTegakiText
-                        id='activity'
-                        orient='orient-top-left'
-                        className='text-3xl md:text-4xl lg:text-5xl'
-                    >
-                        {current[index].text}
-                    </RewritingTegakiText>
+                    <TegakiWrapper id='context' context={{
+                        time: { mode: 'uncontrolled', delay: 0.4, speed: 3 }
+                    }}>
+                        <RewritingTegakiText
+                            id='activity'
+                            orient='orient-top-left'
+                            className='text-3xl md:text-4xl lg:text-5xl'
+                        >
+                            {current[index].text}
+                        </RewritingTegakiText>
+                    </TegakiWrapper>
                 </SequentialAnimation>
             </div>
         </div>

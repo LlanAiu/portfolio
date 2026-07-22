@@ -10,6 +10,7 @@ import TegakiText from '@/components/animations/tegaki/tegaki-text';
 import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
 import LinkAnimation from '@/components/animations/link-animation';
 import { useIsTouchDevice } from '@/hooks/useIsTouchDevice';
+import TegakiWrapper from '@/components/animations/tegaki/tegaki-wrapper';
 
 
 export default function Home() {
@@ -54,7 +55,11 @@ export default function Home() {
             }}>
                 <TegakiText id='hello' className='text-7xl'>Hello There!</TegakiText>
                 <TegakiText id='name' className='text-5xl'>I'm Alan Liu.</TegakiText>
-                <TegakiText id='suggestion' className='text-3xl'>Since we're here already, why don't we</TegakiText>
+                <TegakiWrapper id='context' context={{
+                    time: { mode: 'uncontrolled', delay: 0.4, speed: 3.5 }
+                }}>
+                    <TegakiText id='suggestion' className='text-3xl'>Since we're here already, why don't we</TegakiText>
+                </TegakiWrapper>
                 <LinkAnimation id='link' href={links[display].link} ref={linkRef}>
                     <RewritingTegakiText id='link-text' orient='orient-center' className='text-4xl'>{links[display].text}</RewritingTegakiText>
                 </LinkAnimation>

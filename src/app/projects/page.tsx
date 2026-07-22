@@ -47,28 +47,28 @@ export default function ProjectsPage() {
     const projects = [
         {
             title: 'Mourning Ember',
-            description: 'A 2D, top-down dungeon-crawling game merging a point-and-click exploration system with turn-based combat and a card-based move set. Built using a custom game engine via JavaFX.',
+            description: 'Dungeon-crawler + turn-based combat + cards + JavaFX = ...something, uh..., interesting?',
             link: 'https://gitfront.io/r/Llan/pCi6b29FZTMV/mourning-ember/'
         },
         {
             title: 'Neural Networks in Rust',
-            description: 'Self explanatory, but a side library built in accordance with and as practice for \'Deep Learning\' (2017)',
+            description: 'An implementation of some content in \'Deep Learning\' (since no in-book practice problems)',
             link: 'https://github.com/LlanAiu/rusted-networks'
         },
         {
             title: 'Trivate',
-            description: 'A online head-to-head platform combining Protobowl\'s trivia focus with online Chess platform\'s 1-on-1 and rating concepts',
+            description: 'Protobowl, but like 1-on-1 and with ELO, because ELO makes everything better (...yes?)',
             link: 'https://github.com/pranavkosuri97/hacknctriviaapp'
         },
         {
-            title: 'Solo Mafia',
-            description: 'A project that gives you a platform to play Mafia even if you have no friends with you right now (Built for HackDuke \'25)',
-            link: 'https://github.com/LlanAiu/HD2025'
+            title: 'Gomoku-RL',
+            description: 'For an intro to RL workshop, meaning you get to train (pretty dumb) models from scratch',
+            link: 'https://github.com/LlanAiu/Gomoku-RL'
         },
         {
-            title: 'Let You Cook',
-            description: 'An application for suggested recipes that you can make from a list of ingredients that you have',
-            link: 'https://github.com/LlanAiu/recipe-api'
+            title: 'Solo Mafia',
+            description: 'Mafia, but for when none of your friends feel like showing up to play',
+            link: 'https://github.com/LlanAiu/HD2025'
         },
     ];
 
@@ -90,7 +90,7 @@ export default function ProjectsPage() {
                     </RewritingTegakiText>
 
                     <ParallelAnimation id='details' context={{
-                        time: { mode: 'uncontrolled', delay: 0.4, speed: 4.5 }
+                        time: { mode: 'uncontrolled', delay: 0.4, speed: 4 }
                     }}>
                         <RewritingTegakiText
                             id='description'
