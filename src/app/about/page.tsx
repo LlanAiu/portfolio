@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import defaultImage from '../../../public/ProfileImage2.jpg';
 import bellTowerImage from '../../../public/BellTower.jpg';
 import kouryImage from '../../../public/Koury.jpg';
-import roboticsImage from '../../../public/Robotics.jpg';
+import roboticsImage from '../../../public/Robotics.png';
 import cardsImage from '../../../public/Cards.jpg';
 import { TextChangeDelay, TextSwapFade } from '@/lib/animation/animation-utils';
 import SequentialAnimation from '@/components/animations/sequential-animation';
@@ -70,7 +70,7 @@ export default function AboutPage() {
             image: cardsImage,
         },
         {
-            text: 'I am interested in machine learning and robotics',
+            text: 'I\'m interested in CV, spatial int., and robotics',
             image: roboticsImage,
         },
         {
