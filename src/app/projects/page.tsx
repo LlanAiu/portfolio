@@ -46,24 +46,29 @@ export default function ProjectsPage() {
 
     const projects = [
         {
+            title: 'Gomoku-RL',
+            description: 'For an intro to RL workshop, meaning you get to train (pretty dumb) models from scratch',
+            link: 'https://github.com/LlanAiu/Gomoku-RL'
+        },
+        {
+            title: 'Rusted Networks',
+            description: 'A rust implementation of content from \'Deep Learning\' (since no in-book practice problems)',
+            link: 'https://github.com/LlanAiu/rusted-networks'
+        },
+        {
+            title: 'VIN-NBV V2',
+            description: 'IsaacLab simulator support for training view introspection networks that tell drones where to fly',
+            link: 'https://gitfront.io/r/Llan/KK6bbhNTS893/VIN-IsaacLab-2.3/'
+        },
+        {
             title: 'Mourning Ember',
             description: 'Dungeon-crawler + turn-based combat + cards + JavaFX = ...something, uh..., interesting?',
             link: 'https://gitfront.io/r/Llan/pCi6b29FZTMV/mourning-ember/'
         },
         {
-            title: 'Neural Networks in Rust',
-            description: 'An implementation of some content in \'Deep Learning\' (since no in-book practice problems)',
-            link: 'https://github.com/LlanAiu/rusted-networks'
-        },
-        {
             title: 'Trivate',
             description: 'Protobowl, but like 1-on-1 and with ELO, because ELO makes everything better (...yes?)',
             link: 'https://github.com/pranavkosuri97/hacknctriviaapp'
-        },
-        {
-            title: 'Gomoku-RL',
-            description: 'For an intro to RL workshop, meaning you get to train (pretty dumb) models from scratch',
-            link: 'https://github.com/LlanAiu/Gomoku-RL'
         },
         {
             title: 'Solo Mafia',
