@@ -1,13 +1,14 @@
 // builtin
 
 // external
-import { TegakiRenderer, type TegakiRendererHandle } from "tegaki";
+import type { TegakiRendererHandle } from "tegaki";
 import { useContext, useEffect, useRef } from "react";
 
 // internal
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
 import type { ForwardingComponent } from "@/lib/util/forwarding-component";
 import { TegakiContext } from "@/lib/animation/tegaki-context";
+import PreviewTegakiRenderer from "./preview-tegaki-renderer";
 
 
 interface TegakiTextProps extends TimedAnimation, ForwardingComponent {
@@ -37,16 +38,17 @@ export default function TegakiText({ children, id, className, style, index, grou
     }, [index, groupIndex])
 
     return (
-        <TegakiRenderer
+        <PreviewTegakiRenderer
             ref={ref}
             font={context.font}
             time={context.time}
             effects={context.effects}
             className={className}
-            style={{ ...style, opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? 1 : 0 }}
+            style={style}
+            inkActive={(groupIndex ?? 0) >= (index ?? 0)}
             onComplete={onComplete}
         >
             {children}
-        </TegakiRenderer>
+        </PreviewTegakiRenderer>
     );
 }

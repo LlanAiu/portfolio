@@ -3,13 +3,14 @@
 
 // external
 import { useContext, useEffect, useRef, useState } from "react";
-import { TegakiRenderer, type TegakiRendererHandle } from "tegaki";
+import type { TegakiRendererHandle } from "tegaki";
 
 // internal
 import "./rewriting-tegaki-text.css"
 import type { TimedAnimation } from "@/lib/animation/timed-animation";
 import type { ForwardingComponent } from "@/lib/util/forwarding-component";
 import { TegakiContext } from "@/lib/animation/tegaki-context";
+import PreviewTegakiRenderer from "./preview-tegaki-renderer";
 
 
 interface RewritingTegakiTextProps extends TimedAnimation, ForwardingComponent {
@@ -120,43 +121,47 @@ export default function RewritingTegakiText({
 
     return (
         <div className={className} style={{ ...style, position: 'relative', height: height ? height : 80 }}>
-            <TegakiRenderer
+            <PreviewTegakiRenderer
                 ref={ref1}
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
                 onComplete={onComplete}
                 className={orient}
+                inkActive={playFirst && (groupIndex ?? 0) >= (index ?? 0)}
+                aria-hidden={!playFirst}
                 style={{
                     width: "max-content",
                     position: "absolute",
                     zIndex: playFirst ? 2 : 1,
-                    opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? (playFirst ? 1 : 0) : 0,
+                    opacity: playFirst ? 1 : 0,
                     transition: playFirst ? 'opacity 0.3s' : 'opacity 0.3s ease-in-out',
                     pointerEvents: playFirst ? 'auto' : 'none'
                 }}
             >
                 {text1}
-            </TegakiRenderer>
+            </PreviewTegakiRenderer>
 
-            <TegakiRenderer
+            <PreviewTegakiRenderer
                 ref={ref2}
                 font={context.font}
                 time={context.time}
                 effects={context.effects}
                 onComplete={onComplete}
                 className={orient}
+                inkActive={!playFirst && (groupIndex ?? 0) >= (index ?? 0)}
+                aria-hidden={playFirst}
                 style={{
                     width: "max-content",
                     position: "absolute",
                     zIndex: playFirst ? 1 : 2,
-                    opacity: ((groupIndex ?? 0) >= (index ?? 0)) ? (playFirst ? 0 : 1) : 0,
+                    opacity: playFirst ? 0 : 1,
                     transition: playFirst ? 'opacity 0.3s ease-in-out' : 'opacity 0.3s',
                     pointerEvents: playFirst ? 'none' : 'auto'
                 }}
             >
                 {text2}
-            </TegakiRenderer>
+            </PreviewTegakiRenderer>
         </div>
     );
 }
