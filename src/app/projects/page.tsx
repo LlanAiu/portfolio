@@ -4,17 +4,25 @@
 // external
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 
 // internal
 import { TextChangeDelay } from '@/lib/animation/animation-utils';
-import SequentialAnimation from '@/components/animations/sequential-animation';
 import RewritingTegakiText from '@/components/animations/tegaki/rewriting-tegaki-text';
 import FadeBlockAnimation from '@/components/animations/motion/fade-block';
 import ParallelAnimation from '@/components/animations/parallel-animation';
 import { useOnScreenSize } from '@/hooks/useOnScreenSize';
+import TegakiWrapper from '@/components/animations/tegaki/tegaki-wrapper';
+
+const linkColorSchemes = [
+    'bg-red-100 hover:bg-red-300',
+    'bg-green-100 hover:bg-green-300',
+    'bg-blue-100 hover:bg-blue-300',
+];
 
 export default function ProjectsPage() {
     const [index, setIndex] = useState(0);
+    const reducedMotion = useReducedMotion();
     const titleHeight = useOnScreenSize(40, 40, 50, 50);
     const textHeight = useOnScreenSize(105, 105, 100, 120);
 
@@ -82,43 +90,53 @@ export default function ProjectsPage() {
             <div
                 className='space-y-12 pt-6 md:space-y-18 md:pt-12 lg:space-y-24 lg:pt-24'
             >
-                <SequentialAnimation id='projects' context={{
-                    time: { mode: 'uncontrolled', delay: 0.4, speed: 2.5 }
+                <ParallelAnimation id='projects' context={{
+                    time: { mode: 'uncontrolled', speed: 4 }
                 }}>
-                    <RewritingTegakiText
-                        id='title'
-                        orient='orient-top-left'
-                        height={titleHeight}
-                        className='text-3xl md:text-4xl lg:text-5xl'
-                    >
-                        {projects[index].title}
-                    </RewritingTegakiText>
-
-                    <ParallelAnimation id='details' context={{
-                        time: { mode: 'uncontrolled', delay: 0.4, speed: 4 }
+                    <TegakiWrapper id='title-timing' context={{
+                        time: { mode: 'uncontrolled', speed: 2.5 }
                     }}>
                         <RewritingTegakiText
-                            id='description'
+                            id='title'
                             orient='orient-top-left'
-                            height={textHeight}
-                            className='text-2xl md:text-3xl lg:text-4xl'
+                            height={titleHeight}
+                            className='text-3xl md:text-4xl lg:text-5xl'
                         >
-                            {projects[index].description}
+                            {projects[index].title}
                         </RewritingTegakiText>
-                        <FadeBlockAnimation
-                            id='project-link'
-                            orientation='horizontal'
-                            className='w-max h-max'
-                        >
-                            <div className='rounded-md px-3 py-2.5 bg-blue-100 hover:bg-blue-300'>
-                                <Link href={projects[index].link}>
+                    </TegakiWrapper>
+                    <RewritingTegakiText
+                        id='description'
+                        orient='orient-top-left'
+                        height={textHeight}
+                        className='text-2xl md:text-3xl lg:text-4xl'
+                    >
+                        {projects[index].description}
+                    </RewritingTegakiText>
+                    <FadeBlockAnimation
+                        id='project-link'
+                        orientation='horizontal'
+                        className='w-max h-max'
+                    >
+                        <AnimatePresence mode='wait' initial={false}>
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0, pointerEvents: 'none' }}
+                                transition={{ duration: reducedMotion ? 0 : TextChangeDelay }}
+                            >
+                                <Link
+                                    href={projects[index].link}
+                                    className={`block rounded-md px-3 py-2.5 ${linkColorSchemes[index % linkColorSchemes.length]}`}
+                                >
                                     <span className='sm:text-xl md:text-2xl'>Project Link</span>
                                 </Link>
-                            </div>
-                        </FadeBlockAnimation>
-                    </ParallelAnimation>
-                </SequentialAnimation>
+                            </motion.div>
+                        </AnimatePresence>
+                    </FadeBlockAnimation>
+                </ParallelAnimation>
             </div>
-        </div>
+        </div >
     );
 }

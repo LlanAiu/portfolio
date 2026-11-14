@@ -1,0 +1,36 @@
+[data-handwriting-preview] [data-tegaki="overlay"] {
+    position: relative;
+    /* Tegaki sets transparent text fill inline; keep its layout and selection
+       layer, but reveal it in the inherited ink color. */
+    -webkit-text-fill-color: currentColor !important;
+    opacity: var(--handwriting-preview-opacity, 0.23);
+    animation: handwriting-preview-in var(--handwriting-preview-duration, 500ms) ease-out both;
+}
+
+[data-handwriting-preview] [data-tegaki="canvas"] {
+    z-index: 1;
+}
+
+[data-handwriting-preview][data-ink-active="false"] [data-tegaki="canvas"] {
+    visibility: hidden;
+}
+
+[data-handwriting-preview][data-ink-complete="true"] [data-tegaki="overlay"] {
+    -webkit-text-fill-color: transparent !important;
+}
+
+@keyframes handwriting-preview-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: var(--handwriting-preview-opacity, 0.23);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-handwriting-preview] [data-tegaki="overlay"] {
+        animation: none;
+    }
+}
